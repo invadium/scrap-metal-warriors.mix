@@ -24,6 +24,7 @@ const style = {
         debug: {
             anchor: '#ff5533',
             joint:  '#ffb300',
+            bone:   '#c29f5f',
         },
     },
 

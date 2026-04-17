@@ -15,6 +15,9 @@ class Joint {
             // sub-joints
             _ls:  [],
             _dir: {},
+
+            // animation keys
+            keys: [],
         }, st)
     }
 
@@ -32,6 +35,13 @@ class Joint {
         joint.__ = this
         joint.skeleton = this.skeleton
         joint.init()
+
+        return joint
+    }
+
+    attachKey(key) {
+        this.keys.push(key)
+        key.__ = this
     }
 
     apply(fn, predicate) {
@@ -49,6 +59,30 @@ class Joint {
                 if (e.applyAll) e.applyAll(fn, predicate)
             }
         })
+    }
+
+    sx(lx) {
+        return this.__.sx(lx + this.x)
+    }
+
+    sy(ly) {
+        return this.__.sy(ly + this.y)
+    }
+
+    evo(dt) {
+        const ls = this._ls,
+              N  = ls.length
+        for (let i = N - 1; i >= 0; i--) {
+            const joint = ls[i]
+            joint.evo(dt)
+        }
+
+        const keys = this.keys,
+              kN   = keys.length
+        for (let i = kN - 1; i >= 0; i--) {
+            const key = keys[i]
+            key.evo(dt)
+        }
     }
 
 }

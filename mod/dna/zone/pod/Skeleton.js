@@ -9,4 +9,12 @@ class Skeleton extends Joint {
         }, st) )
     }
 
+    sx(lx) {
+        return this.x + lx
+    }
+
+    sy(ly) {
+        return this.y + ly
+    }
+
 }

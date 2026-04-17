@@ -19,26 +19,40 @@ class Mech extends Platform {
         const skeleton = this.attach( new dna.zone.pod.Skeleton() )
 
         // body
+        const bodyJoint = skeleton.attach( new dna.zone.pod.Joint({
+            mount: {
+                x: 0,
+                y: 0,
+            },
+        }) )
+        bodyJoint.attachKey({
+            evo: function(dt) {
+                const joint = this.__
+                joint.y = joint.mount.y + 2.5 * sin(env.time * 1.2)
+            }
+        })
         this.attach( new dna.zone.pod.Block({
-            joint: skeleton,
-            x: 0,
-            y: 0,
+            joint: bodyJoint,
             w: 20,
-            h: 50,
+            h: 40,
             color: hsl(.50, .4, .4)
         }) )
 
         // head
-        const headJoint = skeleton.attach( new dna.zone.pod.Joint({
+        const headJoint = bodyJoint.attach( new dna.zone.pod.Joint({
             mount: {
                 x: 7,
-                y: 30,
+                y: 25,
             }
         }) )
+        headJoint.attachKey({
+            evo: function(dt) {
+                const joint = this.__
+                joint.x = joint.mount.x + 1.5 * sin(env.time * 1.7)
+            }
+        })
         this.attach( new dna.zone.pod.Block({
             joint: headJoint,
-            x: 7,
-            y: 30,
             w: 20,
             h: 20,
             color: hsl(.66, .4, .4),

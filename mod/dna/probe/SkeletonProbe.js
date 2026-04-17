@@ -16,6 +16,11 @@ class SkeletonProbe {
         rect(-4, -4, 8, 8)
 
         function drawJoint(joint) {
+            if (env.showBones) {
+                lineWidth(1)
+                stroke( env.style.color.debug.bone )
+                line(0, 0, joint.x, joint.y)
+            }
             save()
             translate(joint.x, joint.y)
 

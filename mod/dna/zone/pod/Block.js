@@ -2,8 +2,6 @@ class Block {
 
     constructor(st) {
         augment(this, {
-            x: 0,
-            y: 0,
             w: 0,
             h: 0,
             color: hsl(.35, .4, .4),
@@ -11,7 +9,9 @@ class Block {
     }
 
     draw() {
-        const { x, y, w, h, color } = this
+        const { joint, w, h, color } = this
+        const x = joint.sx(0)
+        const y = joint.sy(0)
 
         fill(color)
         rect(x - .5*w, y - .5*h, w, h)
