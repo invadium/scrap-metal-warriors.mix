@@ -64,7 +64,7 @@ class RulerProbe {
             fill(color)
             baseMiddle()
             alignRight()
-            font(env.style.font.zoneProbe.head)
+            font(env.style.font.zoneProbe.head) // TODO get from style by a string locator || default collider font and style
             text(`${by}`, -markSize, 0)
 
             restore()

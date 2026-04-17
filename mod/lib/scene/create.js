@@ -37,6 +37,11 @@ function create() {
 
     })
 
+    zone.spawn('Mech', {
+        x: 100,
+        y: 25,
+    })
+
     /*
     // mark up the coordinate spaces
     lab.spawn('CoordinateSystemProbe', {

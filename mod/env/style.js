@@ -20,6 +20,11 @@ const style = {
             front:  hsl(.14, .4, .5),
             back:  '#000000C0',
         },
+
+        debug: {
+            anchor: '#ff5533',
+            joint:  '#ffb300',
+        },
     },
 
     font: {

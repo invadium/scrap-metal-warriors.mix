@@ -1,21 +1,55 @@
 let id = 0
 
-class Mech {
+const Platform = require('dna/zone/Platform')
+
+class Mech extends Platform {
 
     constructor(st) {
-        augment(this, {
+        super( augment({
             name: 'mech' + (++id),
 
+            w: 20,
+            h: 50,
+
+            health:    70,
+            maxHealth: 100,
+        }, st) )
+
+        // skeleton
+        const skeleton = this.attach( new dna.zone.pod.Skeleton() )
+
+        // body
+        this.attach( new dna.zone.pod.Block({
+            joint: skeleton,
             x: 0,
             y: 0,
-            w: 70,
-            h: 120,
+            w: 20,
+            h: 50,
+            color: hsl(.50, .4, .4)
+        }) )
 
-            health: 70,
-            maxHealth: 100,
-        }, st)
+        // head
+        const headJoint = skeleton.attach( new dna.zone.pod.Joint({
+            mount: {
+                x: 7,
+                y: 30,
+            }
+        }) )
+        this.attach( new dna.zone.pod.Block({
+            joint: headJoint,
+            x: 7,
+            y: 30,
+            w: 20,
+            h: 20,
+            color: hsl(.66, .4, .4),
+        }) )
+
+        if (env.showJoints) {
+            this.attach( new dna.probe.SkeletonProbe() )
+        }
     }
 
+    /*
     draw() {
         const { x, y, w, h } = this
 
@@ -39,5 +73,5 @@ class Mech {
         restore()
 
     }
-
+    */
 }
