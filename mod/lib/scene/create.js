@@ -1,22 +1,44 @@
-function scene() {
-    // TODO clean up the previous scene if needed!
-    const zone = lab.touch('zone')
+function create() {
+
+    this.clean()
+
+    const zone = lab.touch('zone', {
+        hidden: true,
+        width:  500,  // TODO take it from the main menu config
+    })
+    if (env.debug) {
+        zone.spawn('RulerProbe', {
+            x: 0,
+            y: 0,
+            width: zone.width,
+            height: 200,
+
+            step:  zone.width/10,
+
+            flipY: true,
+        })
+    }
+
     const ports = lab.touch('ports')
 
     const cam1 = ports.spawn('SlideCameraNG', {
         name: 'camera1',
 
         view: {
-            x:     0,
-            y:     0,
-            zoom:  1,
+            x:     200,
+            y:     100,
+            zoom:  2,
             flipY: true,
+        },
+
+        getDisplayList: function() {
+            return zone._ls
         },
 
     })
 
+    /*
     // mark up the coordinate spaces
-
     lab.spawn('CoordinateSystemProbe', {
         x: 0,
         y: 0,
@@ -67,4 +89,5 @@ function scene() {
             lineWidth:  2,
         },
     })
+    */
 }

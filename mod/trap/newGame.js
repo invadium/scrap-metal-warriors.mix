@@ -1,3 +1,3 @@
 function newGame() {
-    lib.gen.scene()
+    lib.scene.create()
 }

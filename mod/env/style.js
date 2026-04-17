@@ -64,6 +64,10 @@ const style = {
             size:   32,
         },
 
+        zoneProbe: {
+            family: 'moon',
+            size: 12,
+        },
         debug: {
             family: 'moon',
             size: 24,
