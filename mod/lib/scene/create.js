@@ -8,17 +8,8 @@ function create() {
         width:  500,  // TODO take it from the main menu config
     })
     if (env.debug) {
-        lab.spawn({
-            draw: function() {
-                save()
-                    translate(rx(.5), ry(.5))
-                    lineWidth(1)
-                    stroke(.5, .5, .5)
-                    const R = 50
-                    line(-R,  0, R, 0)
-                    line( 0, -R, 0, R)
-                restore()
-            }
+        lab.spawn('Fiducial', {
+            Z: -101,
         })
 
         zone.spawn('RulerProbe', {
