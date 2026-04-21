@@ -3,10 +3,24 @@ function create() {
     this.clean()
 
     const zone = lab.touch('zone', {
+        Z:      21,
         hidden: true,
         width:  500,  // TODO take it from the main menu config
     })
     if (env.debug) {
+        lab.spawn({
+            draw: function() {
+                save()
+                    translate(rx(.5), ry(.5))
+                    lineWidth(1)
+                    stroke(.5, .5, .5)
+                    const R = 50
+                    line(-R,  0, R, 0)
+                    line( 0, -R, 0, R)
+                restore()
+            }
+        })
+
         zone.spawn('RulerProbe', {
             x: 0,
             y: 0,
@@ -17,15 +31,37 @@ function create() {
 
             flipY: true,
         })
+
+        /*
+        lab.spawn('RulerProbe', {
+            x: 0,
+            y: 0,
+            width:  rx(.5),
+            height: ry(.5),
+
+            step:  zone.width/10,
+
+            flipY: false,
+
+            evo: function(dt) {
+                this.x = rx(.25)
+                this.y = ry(.25)
+                this.width = rx(.5)
+                this.height = ry(.5)
+            },
+        })
+        */
     }
 
-    const ports = lab.touch('ports')
+    const ports = lab.touch('ports', {
+        Z: 27,
+    })
 
     const cam1 = ports.spawn('SlideCameraNG', {
-        name: 'camera1',
+        name: 'cam1',
 
         view: {
-            x:     200,
+            x:     100,
             y:     100,
             zoom:  2,
             flipY: true,
@@ -37,9 +73,25 @@ function create() {
 
     })
 
+    if (env.debug) {
+        zone.spawn('CoordGrid', {
+            port: cam1,
+        })
+    }
+
     zone.spawn('Mech', {
         x: 100,
         y: 25,
+    })
+
+    zone.spawn('Mech', {
+        x: 150,
+        y: 120,
+    })
+
+    zone.spawn('Mech', {
+        x: 200,
+        y: -70,
     })
 
     /*

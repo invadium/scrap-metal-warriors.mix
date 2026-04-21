@@ -88,4 +88,8 @@ class Mech extends Platform {
 
     }
     */
+
+    getStatus() {
+        return `mech [${this.name}]`
+    }
 }

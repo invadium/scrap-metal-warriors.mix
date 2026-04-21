@@ -74,8 +74,10 @@ const style = {
             family: 'moon',
             size: 12,
         },
+
+
         debug: {
-            family: 'moon',
+            family: 'pixel-operator',
             size: 24,
         },
     },

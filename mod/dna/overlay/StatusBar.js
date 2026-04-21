@@ -1,17 +1,32 @@
-const df = {
-    debug:         true,
-    name:          'statusBar',
-    message:       '',
-    color:         hsl(.14, .4, .5),
-    background:    '#000000C0',
-    margin:        8,
-    hideWhenEmpty: true,
-}
-
 class StatusBar {
 
     constructor(st) {
-        extend(this, df, st)
+        extend(this, {
+            debug:         true,
+            name:          'statusBar',
+            message:       '',
+            color:         hsl(.14, .4, .5),
+            background:    '#000000C0',
+            margin:        8,
+            hideWhenEmpty: true,
+        }, st)
+    }
+
+    evo(dt) {
+        const ls = []
+        ls.lmb = (mouse.buttons & 1) > 0
+        ls.mmb = (mouse.buttons & 2) > 0
+        ls.rmb = (mouse.buttons & 4) > 0
+        lab.pick(mouse.x, mouse.y, ls)
+
+        let status
+        ls.forEach(e => {
+            if (isFun(e.getStatus)) status = e.getStatus()
+            else if (e.status) status = e.status
+        })
+
+        if (status) env.status = status
+        else env.status = ''
     }
 
     draw() {
