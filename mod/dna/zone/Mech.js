@@ -15,6 +15,13 @@ class Mech extends Platform {
             maxHealth: 100,
         }, st) )
 
+        // physics
+        this.attachAll([
+            new dna.zone.pod.Momentum(),
+            new dna.zone.pod.MomentumProbe(),
+            new dna.zone.pod.GravityEffect(),
+        ])
+
         // skeleton
         const skeleton = this.attach( new dna.zone.pod.Skeleton() )
 
