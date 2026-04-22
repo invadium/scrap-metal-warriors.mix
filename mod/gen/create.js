@@ -5,7 +5,7 @@ function create() {
     const zone = lab.touch('zone', {
         Z:      21,
         hidden: true,
-        width:  500,  // TODO take it from the main menu config
+        width:  2000,  // TODO take it from the main menu config
     })
 
     const ports = lab.touch('ports', {
@@ -27,7 +27,7 @@ function create() {
         },
     })
     cam1.spawn('ElasticTargetingPod')
-    $.cam = cam1
+    $.cam = pin.cam = cam1
 
     zone.spawn('Mech', {
         x: 100,
