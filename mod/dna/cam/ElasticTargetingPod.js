@@ -9,13 +9,13 @@ class ElasticTargetingPod {
                 y:    0,
                 zoom: 1,
             },
-            slideSpeed:          400,
+            slideSpeed:          600,
             zoomingPrecision:   .1,
             targetingPrecision:  5,
         })
     }
 
-    roll(x) {
+    rollTo(x, caller) {
         const __   = this.__
         const rt   = this.rollTarget
         x = clamp(x, 0, lab.zone.width)
@@ -26,17 +26,19 @@ class ElasticTargetingPod {
         rt.y = yshift
         rt.zoom = 2 // TODO dynamically calc to hold desired vertical space
 
+        // log(`roll by ${caller} to ${rt.x}:${rt.y} ** ${rt.zoom}`)
+
         this.target = rt
     }
 
     slideLeft(dt) {
         const rt = this.rollTarget
-        this.roll(rt.x - (this.slideSpeed / this.__.view.zoom) * dt)
+        this.rollTo(rt.x - (this.slideSpeed / this.__.view.zoom) * dt, 'slideLeft')
     }
 
     slideRight(dt) {
         const rt = this.rollTarget
-        this.roll(rt.x + (this.slideSpeed / this.__.view.zoom) * dt)
+        this.rollTo(rt.x + (this.slideSpeed / this.__.view.zoom) * dt, 'slideRight')
     }
 
     evo(dt) {

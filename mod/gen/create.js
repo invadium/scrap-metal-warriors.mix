@@ -16,8 +16,8 @@ function create() {
         name: 'cam1',
 
         view: {
-            x:     100,
-            y:     100,
+            x:     0,
+            y:     250,
             zoom:  2,
             flipY: true,
         },
@@ -28,6 +28,7 @@ function create() {
     })
     cam1.spawn('ElasticTargetingPod')
     $.cam = pin.cam = cam1
+    defer(() => cam1.targetingPod.rollTo(200, 'setup'), 1)
 
     zone.spawn('Mech', {
         x: 100,

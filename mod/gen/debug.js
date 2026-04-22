@@ -13,7 +13,7 @@ function debug(zone) {
         width: zone.width,
         height: 200,
 
-        step:  zone.width/10,
+        step:  100,
 
         flipY: true,
     })

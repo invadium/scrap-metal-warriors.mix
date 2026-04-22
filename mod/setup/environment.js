@@ -8,5 +8,10 @@ function environment() {
             env[p] = env.config[p]
         }
     }
+
+    // pin the mouse in the middle initially
+    // to avoid auto-triggering slide when the mouse is out on start
+    mouse.x = rx(.5)
+    mouse.y = ry(.5)
 }
 environment.Z = 1
