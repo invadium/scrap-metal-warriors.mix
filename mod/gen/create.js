@@ -25,8 +25,9 @@ function create() {
         getDisplayList: function() {
             return zone._ls
         },
-
     })
+    cam1.spawn('ElasticTargetingPod')
+    $.cam = cam1
 
     zone.spawn('Mech', {
         x: 100,
