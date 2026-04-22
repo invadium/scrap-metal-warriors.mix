@@ -51,7 +51,6 @@ class ElasticTargetingPod {
         if (dist < this.targetingPrecision) return // we are on target
 
         const dir = bearing(view.x, view.y, target.x, target.y)
-        pin.info.set('bearing', `${dir}`)
 
         const speed = this.slideSpeed / view.zoom
         view.x += cos(dir) * speed * dt

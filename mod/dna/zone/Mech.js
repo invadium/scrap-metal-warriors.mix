@@ -20,6 +20,8 @@ class Mech extends Platform {
             new dna.zone.pod.Momentum(),
             new dna.zone.pod.MomentumProbe(),
             new dna.zone.pod.GravityEffect(),
+            new dna.zone.pod.Controller(),
+            new dna.zone.pod.SelectionHint(),
         ])
 
         // skeleton
