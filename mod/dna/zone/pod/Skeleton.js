@@ -4,6 +4,7 @@ class Skeleton extends Joint {
 
     constructor(st) {
         super( augment({
+            type: 'articulation',
             name: 'skeleton',
             skeleton: null,
         }, st) )

@@ -20,6 +20,14 @@ class Mech extends Platform {
             new dna.zone.pod.Momentum(),
             new dna.zone.pod.MomentumProbe(),
             new dna.zone.pod.GravityEffect(),
+
+            new dna.zone.pod.Collider(),
+            new dna.zone.pod.SolidCircle({
+                x: 0,
+                y: 0,
+                r: 20,
+            }),
+
             new dna.zone.pod.Controller(),
             new dna.zone.pod.SelectionHint(),
         ])
@@ -68,8 +76,12 @@ class Mech extends Platform {
         }) )
 
         if (env.showJoints) {
-            this.attach( new dna.probe.SkeletonProbe() )
+            this.attach( new dna.zone.pod.SkeletonProbe() )
         }
+    }
+
+    hit(hitter) {
+        // log('got hit by ' + hitter.name)
     }
 
     /*

@@ -3,6 +3,7 @@ class SelectionHint {
     constructor(st) {
         augment(this, {
             Z:    -11,
+            type: 'info',
             name: 'selectionHint',
         }, st)
     }

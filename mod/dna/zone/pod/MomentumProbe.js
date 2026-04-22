@@ -13,6 +13,7 @@ class MomentumProbe {
     }
 
     draw() {
+        if (!env.debug) return
         // assume we are at the body's origin
         save()
 

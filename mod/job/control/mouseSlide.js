@@ -1,5 +1,5 @@
 function evo(dt) {
-    if (mouse.out) return
+    if (mouse.out || !(mouse.buttons & 1)) return
     const slideAreaWidth = env.tune.mouseSlideArea * ctx.width
 
     if (mouse.x < slideAreaWidth) {

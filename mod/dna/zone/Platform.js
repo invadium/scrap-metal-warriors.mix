@@ -22,6 +22,32 @@ class Platform extends sys.LabFrame {
         // recalculate the practical width and height from included pods
     }
 
+    lx(ux) {
+        return ux - this.x
+    }
+
+    ly(uy) {
+        return uy - this.y
+    }
+
+    ux(lx) {
+        return lx + this.x
+    }
+
+    uy(ly) {
+        return ly + this.y
+    }
+
+    attach(pod) {
+        super.attach(pod)
+
+        if (pod.alias) {
+            this[pod.alias] = pod
+        }
+
+        return pod
+    }
+
     draw() {
         save()
         translate(this.x, this.y)

@@ -2,6 +2,7 @@ class GravityEffect {
 
     constructor(st) {
         augment(this, {
+            type: 'physics',
             name: 'gravityEffect',
         }, st)
     }

@@ -3,6 +3,7 @@ class SkeletonProbe {
     constructor(st) {
         augment(this, {
             Z:    -1,
+            type: 'probe',
             name: 'SkeletonProbe',
         }, st)
     }
@@ -10,7 +11,7 @@ class SkeletonProbe {
     draw() {
         if (!env.showJoints) return
 
-        // show the skeleton anchor
+        // show the skeleton anchor = entity x:y
         lineWidth(1)
         stroke(env.style.color.debug.anchor)
         rect(-4, -4, 8, 8)

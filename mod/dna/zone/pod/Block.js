@@ -2,6 +2,7 @@ class Block {
 
     constructor(st) {
         augment(this, {
+            type: 'visual',
             w: 0,
             h: 0,
             color: hsl(.35, .4, .4),

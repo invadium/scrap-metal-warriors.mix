@@ -77,6 +77,8 @@ class Momentum {
                 sV[0] = min(sV[0] + env.tune.friction * dt, 0)
             }
         }
+
+        __.collider.collide()
     }
 
 }

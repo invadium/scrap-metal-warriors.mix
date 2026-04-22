@@ -1,7 +1,9 @@
+let id = 0
 class RulerProbe {
 
     constructor(st) {
         augment(this, {
+            name:   'rulerProbe' + (++id),
             x:      0,
             y:      0,
             width:  0,
