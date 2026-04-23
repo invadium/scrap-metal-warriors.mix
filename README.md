@@ -11,6 +11,7 @@ Use the following flags to highlight a system of interest:
 ```
 --showJoints
 --showBones
+--showSolids
 ```
 
 You can set them directly on ```env``:

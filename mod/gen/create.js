@@ -33,16 +33,19 @@ function create() {
     zone.spawn('Mech', {
         x: 100,
         y: 25,
+        timestamp: 1.5,
     })
 
     zone.spawn('Mech', {
         x: 150,
         y: 120,
+        timestamp: 4.5,
     })
 
     zone.spawn('Mech', {
         x: 200,
         y: -70,
+        timestamp: 6.6,
     })
 
     if (env.debug) this.debug(zone)

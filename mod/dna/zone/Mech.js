@@ -8,12 +8,16 @@ class Mech extends Platform {
         super( augment({
             name: 'mech' + (++id),
 
-            w: 20,
-            h: 50,
+            w:   20,
+            h:   50,
 
             health:    70,
             maxHealth: 100,
+
+            timestamp: env.time,
         }, st) )
+
+        const mech = this
 
         // physics
         this.attachAll([
@@ -44,8 +48,7 @@ class Mech extends Platform {
         }) )
         bodyJoint.attachKey({
             evo: function(dt) {
-                const joint = this.__
-                joint.y = joint.mount.y + 2.5 * sin(env.time * 1.2)
+                bodyJoint.y = bodyJoint.mount.y + 2.5 * sin((env.time - mech.timestamp) * 1.2)
             }
         })
         this.attach( new dna.zone.pod.Block({
@@ -65,7 +68,7 @@ class Mech extends Platform {
         headJoint.attachKey({
             evo: function(dt) {
                 const joint = this.__
-                joint.x = joint.mount.x + 1.5 * sin(env.time * 1.7)
+                joint.x = joint.mount.x + 1.5 * sin((env.time - mech.timestamp) * 1.7)
             }
         })
         this.attach( new dna.zone.pod.Block({
@@ -74,6 +77,29 @@ class Mech extends Platform {
             h: 20,
             color: hsl(.66, .4, .4),
         }) )
+
+        // gun
+        const gunJoint = bodyJoint.attach( new dna.zone.pod.Joint({
+            mount: {
+                x: 15,
+                y: 5,
+            },
+        }) )
+        gunJoint.attachKey({
+            evo: function(dt) {
+                const joint = this.__
+                joint.y = joint.mount.y + 1.5 * sin((env.time - mech.timestamp) * 4)
+            }
+        })
+        this.attach( new dna.zone.pod.Block({
+            joint: gunJoint,
+            w: 25,
+            h: 5,
+        }) )
+        this.attach( new dna.zone.pod.Gun({
+            joint: gunJoint,
+        }) )
+
 
         if (env.showJoints) {
             this.attach( new dna.zone.pod.SkeletonProbe() )

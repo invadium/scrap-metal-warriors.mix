@@ -25,14 +25,35 @@ class Momentum {
     }
 
     accelerate(dirV2, dt) {
-        this.speedV[0] += dirV2[0] * dt
-        this.speedV[1] += dirV2[1] * dt
+        const __ = this.__
+        const dx = dirV2[0] * dt
+        const dy = dirV2[1] * dt
+        this.speedV[0] += dx
+        this.speedV[1] += dy 
+
+        // reflect this acceleration change in the platform's direction
+        if (dx < 0) {
+            __.dir = -1
+        } else if (dx > 0) {
+            __.dir = 1
+        }
     }
 
     push(dirV2, force, dt) {
+        const __ = this.__
         const acceleration = force / this.mass
-        this.speedV[0] += dirV2[0] * acceleration * dt
-        this.speedV[1] += dirV2[1] * acceleration * dt
+        const dx = dirV2[0] * acceleration * dt
+        const dy = dirV2[1] * acceleration * dt
+
+        this.speedV[0] += dx
+        this.speedV[1] += dy
+
+        // reflect this push in the platform's direction
+        if (dx < 0) {
+            __.dir = -1
+        } else if (dx > 0) {
+            __.dir = 1
+        }
     }
 
     jump(force) {

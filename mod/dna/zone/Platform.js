@@ -13,7 +13,7 @@ class Platform extends sys.LabFrame {
             y:     0,
             w:     0,
             h:     0,
-            dir:   0,
+            dir:   1,
         }, st) )
     }
 
@@ -23,7 +23,7 @@ class Platform extends sys.LabFrame {
     }
 
     lx(ux) {
-        return ux - this.x
+        return this.dir * (ux - this.x)
     }
 
     ly(uy) {
@@ -31,7 +31,7 @@ class Platform extends sys.LabFrame {
     }
 
     ux(lx) {
-        return lx + this.x
+        return (this.dir * lx) + this.x
     }
 
     uy(ly) {
@@ -51,6 +51,7 @@ class Platform extends sys.LabFrame {
     draw() {
         save()
         translate(this.x, this.y)
+        scale(this.dir, 1)
 
         super.draw()
 

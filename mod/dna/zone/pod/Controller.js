@@ -25,8 +25,7 @@ class Controller {
     }
 
     actuate(action) {
-        console.dir(action)
-
+        // console.dir(action)
         switch(action.name) {
             case 'UP': this.__.momentum.jump(35); break;
         }
@@ -38,6 +37,8 @@ class Controller {
         switch(action.name) {
             case 'LEFT':  mt.accelerate([-speed, 0], dt); break; // TODO apply through the attitude pod!
             case 'RIGHT': mt.accelerate([speed, 0], dt);  break;
+
+            case 'A': this.__.gun.fire(dt); break;
         }
     }
 
