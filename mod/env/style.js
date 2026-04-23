@@ -21,6 +21,12 @@ const style = {
             back:  '#000000C0',
         },
 
+        team: [
+            '#b9b9a8',
+            '#5fc9e7', // teal
+            '#ff5dcc', // pink
+        ],
+
         debug: {
             anchor: '#ff5533',
             joint:  '#ffb300',

@@ -7,6 +7,7 @@ class Mech extends Platform {
     constructor(st) {
         super( augment({
             name: 'mech' + (++id),
+            team: 0,
 
             w:   20,
             h:   50,
@@ -47,7 +48,7 @@ class Mech extends Platform {
                 bodyJoint.y = bodyJoint.mount.y + 2.5 * sin((env.time - mech.timestamp) * 1.2)
             }
         })
-        this.attach( new dna.zone.pod.Block({
+        this.attach( new dna.zone.pod.TeamBlock({
             joint: bodyJoint,
             w: 20,
             h: 40,

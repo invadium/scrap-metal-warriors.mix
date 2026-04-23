@@ -35,20 +35,24 @@ function create() {
     defer(() => cam1.targetingPod.rollTo(200, 'setup'), 1)
 
     zone.spawn('Mech', {
-        x: 100,
-        y: 25,
+        team: 1,
+        x:    100,
+        y:    25,
         timestamp: 1.5,
     })
 
     zone.spawn('Mech', {
-        x: 150,
-        y: 120,
+        team: 0,
+        x:    150,
+        y:    120,
         timestamp: 4.5,
     })
 
     zone.spawn('Mech', {
-        x: 200,
-        y: -70,
+        team:  2,
+        dir:  -1,
+        x:     200,
+        y:    -70,
         timestamp: 6.6,
     })
 

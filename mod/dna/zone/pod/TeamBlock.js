@@ -1,23 +1,24 @@
-let id = 0
-class Block {
+const Block = require('dna/zone/pod/Block')
+
+class TeamBlock extends Block {
 
     constructor(st) {
-        augment(this, {
+        super( augment({
             type: 'visual',
-            name: 'block' + (++id),
-            w: 0,
-            h: 0,
-            color: hsl(.35, .4, .4),
-        }, st)
+        }, st) )
     }
 
     draw() {
+        const team = this.__.team
         const { joint, w, h, color } = this
         const x = joint.sx(0)
         const y = joint.sy(0)
 
         fill(color)
         rect(x - .5*w, y - .5*h, w, h)
+
+        fill( env.style.color.team[team] )
+        rect( x - .5*w, y - .2*h, w, .55*h )
 
         if (env.showAnchors) {
             lineWidth(1)

@@ -11,11 +11,11 @@ class Controller {
 
     capture() {
         job.monitor.controller.bindAll(this)
+        // log(this.__.name + ' captured!')
     }
 
     onBind() {
         this._selected = true
-        log(this.__.name + ' captured!')
     }
 
     release() {
@@ -24,7 +24,6 @@ class Controller {
 
     onRelease() {
         this._selected = false
-        log(this.__.name + ' released!')
     }
 
     actuate(action) {
