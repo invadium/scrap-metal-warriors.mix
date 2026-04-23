@@ -3,7 +3,6 @@ class Controller {
     constructor(st) {
         augment(this, {
             name: 'controller',
-            speed: 100,  // TODO move out to an attitude pod?
 
             followThreshold: .1,
         }, st)
@@ -16,6 +15,7 @@ class Controller {
 
     onBind() {
         this._selected = true
+        this.__.bot.disable()
     }
 
     release() {
@@ -24,6 +24,7 @@ class Controller {
 
     onRelease() {
         this._selected = false
+        this.__.bot.enable()
     }
 
     actuate(action) {
@@ -34,13 +35,12 @@ class Controller {
     }
 
     act(action, dt) {
-        const speed = this.speed
-        const mt = this.__.momentum
+        const attitude = this.__.attitude
         switch(action.name) {
-            case 'LEFT':  mt.accelerate([-speed, 0], dt); break; // TODO apply through the attitude pod!
-            case 'RIGHT': mt.accelerate([speed, 0], dt);  break;
+            case 'LEFT':  attitude.left(dt);    break;
+            case 'RIGHT': attitude.right(dt);   break;
 
-            case 'A': this.__.gun.fire(dt); break;
+            case 'A':     this.__.gun.fire(dt); break;
         }
     }
 

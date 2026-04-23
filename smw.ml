@@ -33,6 +33,7 @@ V projectile
 > teams
 > component hit with bubbling damage
 > build a bot button
+V limit mech max speed
 
 
 ### System II

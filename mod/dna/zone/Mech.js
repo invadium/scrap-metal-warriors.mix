@@ -19,6 +19,7 @@ class Mech extends Platform {
 
         this.attachAll([
             new dna.zone.pod.Momentum(),
+            new dna.zone.pod.Attitude(),
             new dna.zone.pod.MomentumProbe(),
             new dna.zone.pod.GravityEffect(),
 
@@ -29,6 +30,7 @@ class Mech extends Platform {
                 r: 20,
             }),
 
+            new dna.zone.pod.RandomActionBot(),
             new dna.zone.pod.Controller(),
             new dna.zone.pod.SelectionHint(),
         ])

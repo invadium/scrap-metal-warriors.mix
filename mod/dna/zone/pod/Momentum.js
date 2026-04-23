@@ -24,12 +24,34 @@ class Momentum {
         this.speedV[0] += dy
     }
 
-    accelerate(dirV2, dt) {
+    accelerate(dir, dt) {
         const __ = this.__
-        const dx = dirV2[0] * dt
-        const dy = dirV2[1] * dt
+        const dx = dir[0] * dt
+        const dy = dir[1] * dt
         this.speedV[0] += dx
         this.speedV[1] += dy 
+
+        // reflect this acceleration change in the platform's direction
+        if (dx < 0) {
+            __.dir = -1
+        } else if (dx > 0) {
+            __.dir = 1
+        }
+    }
+
+    accelerateClamped(dir, maxSpeed, dt) {
+        const __ = this.__
+        const speedV = this.speedV
+        const dx = dir[0] * dt
+        const dy = dir[1] * dt
+        speedV[0] += dx
+        speedV[1] += dy 
+
+        const speed = math.length( speedV[0], speedV[1] )
+        if (speed > maxSpeed) {
+            speedV[0] = (speedV[0] / speed) * maxSpeed
+            speedV[1] = (speedV[1] / speed) * maxSpeed
+        }
 
         // reflect this acceleration change in the platform's direction
         if (dx < 0) {
@@ -91,12 +113,16 @@ class Momentum {
         }
 
         // apply some friction (TODO move out to a separate pod?)
+        let friction = 0
         if (this.isTouchingGround()) {
-            if (sV[0] > 0) {
-                sV[0] = max(sV[0] - env.tune.friction * dt, 0)
-            } else if (sV[0] < 0) {
-                sV[0] = min(sV[0] + env.tune.friction * dt, 0)
-            }
+            friction = env.tune.friction
+        } else {
+            friction = env.tune.airResistance
+        }
+        if (sV[0] > 0) {
+            sV[0] = max(sV[0] - friction * dt, 0)
+        } else if (sV[0] < 0) {
+            sV[0] = min(sV[0] + friction * dt, 0)
         }
 
         __._contact = false

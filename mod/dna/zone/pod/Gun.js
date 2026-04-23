@@ -19,6 +19,8 @@ class Gun {
         // TODO check ammo and spawn a projectile in the current direction
         //      change tilt++ while firing
         if (this.recharge > 0) return
+
+        // TODO move out to a separate function
         const __ = this.__
         const joint = this.joint
 
