@@ -1,32 +1,12 @@
-class SolidCircle {
+const Solid = require('dna/zone/pod/Solid')
+
+class SolidCircle extends Solid {
 
     constructor(st) {
-        extend(this, {
-            type:    'solid',
-            alias:   'solid',
+        super( extend({
             name:    'solidCircle',
-
-            x:        0,
-            y:        0,
             r:        1,
-        }, st)
-    }
-
-    lxy(wx, wy) {
-        const __ = this.__
-        const vec2 = []
-        // translate from body/parent coordinates to the local ones
-        vec2[0] = __.lx(wx) - this.x
-        vec2[1] = __.ly(wy) - this.y
-        return vec2
-    }
-
-    wxy(lx, ly) {
-        const __ = this.__
-        const v2 = []
-        v2[0] = __.ux(lx + this.x)
-        v2[1] = __.uy(ly + this.y)
-        return v2
+        }, st) )
     }
 
     contact(hitter, hitterSolid, resolveContact) {
@@ -39,26 +19,31 @@ class SolidCircle {
         }
         */
 
-        const wxy = hitterSolid.wxy(0, 0)
-        const lxy = this.lxy( wxy[0], wxy[1] )
-        const dist = math.length(lxy[0], lxy[1])
-        if (dist <= this.r + hitterSolid.r) {
-            const contactData = {
-                dist,
-                lxy,
-                wxy,
+        // translate solid center from hitter-local coords -> world coords -> target local coords
+        const wpos = hitterSolid.wpos( [0, 0] )
+        const lpos = this.lpos( wpos )
+
+        if (hitterSolid instanceof dna.zone.pod.SolidCircle || hitterSolid instanceof dna.zone.pod.SolidPoint) {
+            // circle-circle collision
+            const dist = math.length(lpos[0], lpos[1]) // hitter's center distance to our (target) center
+            if (dist <= this.r + hitterSolid.r) {
+                const contactData = {
+                    dist,
+                    lpos,
+                    wpos,
+                }
+                if (env.debug) {
+                    contactData.info = `[${this.__.name}@${round(this.__.x)}:${round(this.__.y)}]`
+                        + ` <=> [${hitterSolid.__.name}@${round(hitterSolid.__.x)}:${round(hitterSolid.__.y)}]`
+                        + ` rel::${round(lpos[0])}:${round(lpos[1])}`
+                }
+                resolveContact(
+                    this.__,
+                    this,
+                    contactData
+                )
+                return true
             }
-            if (env.debug) {
-                contactData.info = `[${this.__.name}@${round(this.__.x)}:${round(this.__.y)}]`
-                    + ` <=> [${hitterSolid.__.name}@${round(hitterSolid.__.x)}:${round(hitterSolid.__.y)}]`
-                    + ` rel::${round(lxy[0])}:${round(lxy[1])}`
-            }
-            resolveContact(
-                this.__,
-                this,
-                contactData
-            )
-            return true
         }
         return false
     }

@@ -14,19 +14,22 @@ class Mover {
     }
 
     evo(dt) {
-        this.__.x += this.vec[0] * dt
-        this.__.y += this.vec[1] * dt
+        const __ = this.__
+        __.x += this.vec[0] * dt
+        __.y += this.vec[1] * dt
 
         // reflect of the ground (TODO incl. random chance)
-        if (this.__.y < 0) {
-            this.__.y = 0
+        if (__.y < 0) {
+            __.y = 0
             this.vec[1] = -this.vec[1]
             const newDir = angleTo(this.vec[0], this.vec[1])
-            this.__.adjustDir(newDir)
+            __.adjustDir(newDir)
 
-            this.__.ox = this.__.x
-            this.__.oy = this.__.y
+            __.ox = __.x
+            __.oy = __.y
         }
+
+        __.collider.collide()
     }
 
     setVector(vec) {

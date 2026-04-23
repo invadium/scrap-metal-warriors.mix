@@ -1,5 +1,5 @@
 const tune = {
-    gravity: 10,
+    gravity: 75,
     friction: 20,
 
     groundLevel: .25,

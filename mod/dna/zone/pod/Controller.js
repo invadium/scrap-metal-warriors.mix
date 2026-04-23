@@ -27,7 +27,7 @@ class Controller {
     actuate(action) {
         // console.dir(action)
         switch(action.name) {
-            case 'UP': this.__.momentum.jump(35); break;
+            case 'UP': this.__.momentum.jump(80); break;
         }
     }
 

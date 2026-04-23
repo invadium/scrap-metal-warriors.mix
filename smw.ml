@@ -21,7 +21,10 @@ V mech
 V projectile
     V bullet hell layer
     V zombie frame pooling
-    > special collider
+    V projectile collisions
+    > projectile penetration state
+    > fade state
+    > projectile damage
     > multi-segment tracers
     > culling
 > scrap metal

@@ -1,7 +1,11 @@
-class Projectile extends sys.LabFrame {
+const Entity = require('dna/zone/Entity')
+
+let id = 0
+class Projectile extends Entity {
 
     constructor(st) {
         super( augment({
+            id:  ++id,
             x:   0,
             y:   0,
             r:   2.5,
@@ -10,20 +14,24 @@ class Projectile extends sys.LabFrame {
             dx:  0,
             dy:  0,
             dir: 0,
-
-            speed: 200,
+ 
+            //speed: 200,
+            speed:  50,
+            source: null,
         }, st) )
         this.attach( new dna.zone.pod.Mover() )
-        this.attach( new dna.zone.pod.ProjectileCollider() )
+        this.attach( new dna.zone.pod.Collider() )
+        this.attach( new dna.zone.pod.SolidPoint() )
         this.attach( new dna.zone.pod.LifespanTrigger({
             lifespan: 2,
         }) )
     }
 
-    calibrate(x, y, dir) {
+    calibrate(x, y, dir, source) {
         this.x = x
         this.y = y
         this.dir = dir
+        this.source = source
         this.ox = x
         this.oy = y
         this.dx = cos(dir) * this.r
@@ -59,6 +67,13 @@ class Projectile extends sys.LabFrame {
         lineWidth(1)
         stroke('#ffbea0ff')
         line(x - dx, y - dy, x + dx, y + dy)
+
+        if (env.debug) {
+            save()
+            translate(this.x, this.y)
+                super.draw()
+            restore()
+        }
     }
 
     respawn() {
@@ -70,5 +85,9 @@ class Projectile extends sys.LabFrame {
     kill() {
         this.dead = true
         this.zombie = true
+    }
+
+    getTitle() {
+        return 'projectile' + (this.id)
     }
 }

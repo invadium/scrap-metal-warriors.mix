@@ -31,7 +31,7 @@ class Gun {
         } else {
             dir = this.tilt + (rnd() * this.spread - .5 * this.spread)
         }
-        const projectile = lab.zone.hell.spawn(dna.zone.Projectile).calibrate(x, y, dir)
+        const projectile = lab.zone.hell.spawn(dna.zone.Projectile).calibrate(x, y, dir, __)
 
         this.heat += this.heatFactor
         this.recharge = this.rechargeTime
