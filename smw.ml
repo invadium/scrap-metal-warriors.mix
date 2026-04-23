@@ -13,12 +13,17 @@ V status bar
 ### Probe I
 V platform
 V mech
-  V gun
-  > scanner
-  > bot controller
-  > hovercraft chasis
-  > scrap metal collector
+    V gun
+    > scanner
+    > bot controller
+    > hovercraft chasis
+    > scrap metal collector
 V projectile
+    V bullet hell layer
+    V zombie frame pooling
+    > special collider
+    > multi-segment tracers
+    > culling
 > scrap metal
 > scrap orbital rain
 > base

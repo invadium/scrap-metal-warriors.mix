@@ -69,6 +69,10 @@ class Joint {
         return this.__.sy(ly + this.y)
     }
 
+    fx(lx) {
+        return this.__.fx(lx + this.x)
+    }
+
     evo(dt) {
         const ls = this._ls,
               N  = ls.length

@@ -61,10 +61,10 @@ class Projectile extends sys.LabFrame {
         line(x - dx, y - dy, x + dx, y + dy)
     }
 
-    respawn(x, y, dir) {
-        this.calibrate(x, y, dir)
+    respawn() {
         this.dead   = false
         this.zombie = false
+        return this
     }
 
     kill() {

@@ -4,12 +4,14 @@ function debug(zone) {
     })
 
     zone.spawn('CoordGrid', {
+        Z:    1,
         port: lab.ports.cam1,
     })
 
     zone.spawn('RulerProbe', {
-        x: 0,
-        y: 0,
+        Z: -11,
+        x:  0,
+        y:  0,
         width: zone.width,
         height: 200,
 

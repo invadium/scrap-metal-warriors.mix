@@ -22,9 +22,8 @@ class Gun {
         const __ = this.__
         const joint = this.joint
 
-        const projectile = lab.zone.spawn('Projectile')
 
-        const x = __.x + joint.sx(0)
+        const x = __.x + joint.fx(0)
         const y = __.y + joint.sy(0)
         let dir
         if (__.dir < 0) {
@@ -32,7 +31,7 @@ class Gun {
         } else {
             dir = this.tilt + (rnd() * this.spread - .5 * this.spread)
         }
-        projectile.calibrate(x, y, dir)
+        const projectile = lab.zone.hell.spawn(dna.zone.Projectile).calibrate(x, y, dir)
 
         this.heat += this.heatFactor
         this.recharge = this.rechargeTime

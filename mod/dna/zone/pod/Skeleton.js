@@ -18,4 +18,8 @@ class Skeleton extends Joint {
         return this.y + ly
     }
 
+    fx(lx) {
+        return this.__.dir * (this.x + lx)
+    }
+
 }

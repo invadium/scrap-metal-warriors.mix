@@ -7,9 +7,13 @@ function create() {
         hidden: true,
         width:  2000,  // TODO take it from the main menu config
     })
-
     const ports = lab.touch('ports', {
         Z: 27,
+    })
+    lab.zone.touch('hell', {
+        Z:    -101,
+        DNA:  'zone/PoolFrame',
+        name: 'hell',
     })
 
     const cam1 = ports.spawn('SlideCameraNG', {
