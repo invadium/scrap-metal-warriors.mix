@@ -19,7 +19,6 @@ class Mech extends Platform {
 
         const mech = this
 
-        // physics
         this.attachAll([
             new dna.zone.pod.Momentum(),
             new dna.zone.pod.MomentumProbe(),
@@ -96,8 +95,21 @@ class Mech extends Platform {
             w: 25,
             h: 5,
         }) )
+
+        const barrelJoint = gunJoint.attach( new dna.zone.pod.Joint({
+            mount: {
+                x: 15,
+                y: 0,
+            },
+        }) )
         this.attach( new dna.zone.pod.Gun({
-            joint: gunJoint,
+            joint: barrelJoint,
+        }) )
+
+
+        // health in the end to recalculate hit points
+        this.attach( new dna.zone.pod.Health({
+            hits: 100,
         }) )
 
 
@@ -106,8 +118,9 @@ class Mech extends Platform {
         }
     }
 
-    hit(hitter) {
-        // log('got hit by ' + (hitter.name || hitter.getTitle()))
+    hit(hitter, targetSolid, force) {
+        this.health.damage(force)
+        log('got hit by ' + (hitter.name || hitter.getTitle()) + ' with ' + force + ' health: ' + this.health.hits)
     }
 
     /*

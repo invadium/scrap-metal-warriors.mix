@@ -7,6 +7,8 @@ const FADE      = 3
 const TRAILS    = 5
 const FADE_TIME = .75
 
+const REBOUND   = .5
+
 let id = 0
 class Projectile extends Entity {
 
@@ -24,7 +26,7 @@ class Projectile extends Entity {
             trail:  new Float64Array(2 * TRAILS),
             trails: 0,
  
-            speed: 200,
+            speed:  400,
             force:  5,
             source: null,
         }, st) )
@@ -32,7 +34,7 @@ class Projectile extends Entity {
         this.attach( new dna.zone.pod.Collider() )
         this.attach( new dna.zone.pod.SolidPoint() )
         this.attach( new dna.zone.pod.KillSwitch({
-            lifespan: 2,
+            lifespan: 1.5,
         }) )
     }
 
@@ -111,7 +113,7 @@ class Projectile extends Entity {
         return this
     }
 
-    reflect() {
+    rebound() {
         const _ = this
         if (_.trails >= TRAILS) {
             // TODO shift trails to preserve the latest ones?
@@ -129,14 +131,27 @@ class Projectile extends Entity {
         this.penTimer = rnd() * contactSolid.r / this.speed
         this._target = contactTarget
         this._targetSolid = contactSolid
-        console.log(this.penTimer)
-        console.dir(this._target)
-        console.dir(this._targetSolid)
+        // console.log(this.penTimer)
+        // console.dir(this._target)
+        // console.dir(this._targetSolid)
+    }
+
+    explosiveRebound(fromTarget) {
+        if (rnd() > REBOUND) return false
+
+        if (rnd() < .5) this.mover.rebound(0)
+        else this.mover.rebound(1)
+
+        this.source = fromTarget
+        this.fadeTimer = FADE_TIME
+        this.state = TRAVEL
+        return true
     }
 
     explode() {
-        // TODO maybe rebound off the target? rebound factor for armor with metal shield > .5?
-        this._target.hit(this._targetSolid, this.force)
+        if (this.explosiveRebound(this._target)) return
+
+        this._target.hit(this, this._targetSolid, this.force)
         this.fade()
         // TODO sfx and vfx, falling off debris
     }

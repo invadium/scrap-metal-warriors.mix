@@ -22,10 +22,10 @@ V projectile
     V bullet hell layer
     V zombie frame pooling
     V projectile collisions
-    > projectile penetration state
-    > fade state
-    > projectile damage
-    > multi-segment tracers
+    V projectile penetration state
+    V fade state
+    V projectile damage
+    V multi-segment tracers
     > culling
 > scrap metal
 > scrap orbital rain

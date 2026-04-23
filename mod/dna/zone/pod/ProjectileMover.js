@@ -16,6 +16,14 @@ class ProjectileMover {
         this.vec[1] = dy
     }
 
+    rebound(type) {
+        const __ = this.__
+        this.vec[type] = -this.vec[type]
+        const newDir = angleTo(this.vec[0], this.vec[1])
+        __.adjustDir(newDir)
+        __.rebound()
+    }
+
     evo(dt) {
         const __ = this.__
         const STATE = __.state
@@ -24,13 +32,10 @@ class ProjectileMover {
         __.x += this.vec[0] * dt
         __.y += this.vec[1] * dt
 
-        // reflect of the ground (TODO incl. random chance)
+        // rebound of the ground (TODO incl. random chance)
         if (__.y < 0) {
             __.y = 0
-            this.vec[1] = -this.vec[1]
-            const newDir = angleTo(this.vec[0], this.vec[1])
-            __.adjustDir(newDir)
-            __.reflect()
+            this.rebound(1)
         }
 
         const prevContactSolid = __.collider._contactSolid

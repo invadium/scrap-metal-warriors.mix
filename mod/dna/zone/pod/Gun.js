@@ -9,7 +9,7 @@ class Gun {
             recharge: 0,
 
             spread:        .1 * TAU,
-            rechargeTime:  .1,
+            rechargeTime:  .15,
             heatFactor:    .1,
             cooldownSpeed: .1,
         }, st)
