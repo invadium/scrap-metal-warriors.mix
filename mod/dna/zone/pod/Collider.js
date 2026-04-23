@@ -19,14 +19,11 @@ class Collider {
             collisionResolver = (contactTarget, contactSolid, contactPoint) => {
                 if (contactTarget.hit) {
                     contactTarget.hit(hitter)
-                    hitter._contact = true
                 }
             }
         }
 
-        hitter._contact = false
         // if ((mouse.buttons & 1) && hitter instanceof dna.zone.Projectile) debugger
-        
         function collideWithGroup(ls) {
             for (let i = ls.length - 1; i >= 0; i--) {
                 const target = ls[i]

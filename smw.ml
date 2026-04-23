@@ -30,6 +30,7 @@ V projectile
 > scrap metal
 > scrap orbital rain
 > base
+> teams
 > component hit with bubbling damage
 > build a bot button
 
@@ -42,4 +43,7 @@ V projectile
 > vfx
 > transitions
 > in-game console
+
+### Proto II
+> mech and base health bar
 

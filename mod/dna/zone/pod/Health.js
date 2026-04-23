@@ -7,6 +7,7 @@ class Health {
 
             hits: 100,
         }, st)
+        this.maxHits = this.hits
     }
 
     damage(force) {

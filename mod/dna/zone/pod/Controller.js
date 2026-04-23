@@ -4,16 +4,18 @@ class Controller {
         augment(this, {
             name: 'controller',
             speed: 100,  // TODO move out to an attitude pod?
+
+            followThreshold: .1,
         }, st)
     }
 
     capture() {
         job.monitor.controller.bindAll(this)
-        log(this.__.name + ' captured!')
     }
 
     onBind() {
         this._selected = true
+        log(this.__.name + ' captured!')
     }
 
     release() {
@@ -22,6 +24,7 @@ class Controller {
 
     onRelease() {
         this._selected = false
+        log(this.__.name + ' released!')
     }
 
     actuate(action) {
@@ -43,5 +46,18 @@ class Controller {
     }
 
     cutOff(action) {
+    }
+
+    evo(dt) {
+        if (!this._selected) return
+        const __ = this.__
+
+        const sx = pin.cam.ux(__.x),
+              sy = pin.cam.uy(__.y)
+
+        const edge = ctx.width * this.followThreshold
+        if (sx < edge || sx > ctx.width - edge) {
+            pin.cam.targetingPod.rollTo(__.x)
+        }
     }
 }

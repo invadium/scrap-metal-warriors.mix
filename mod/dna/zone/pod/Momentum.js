@@ -99,7 +99,15 @@ class Momentum {
             }
         }
 
-        __.collider.collide()
+        __._contact = false
+        __.collider.collide((contactTarget, contactSolid, contactPoint) => {
+            if (contactTarget.hit) {
+                // just mark the contact for now
+                __._contact = true
+                // TODO touch another bot? hit it?
+                // contactTarget.hit(hitter)
+            }
+        })
     }
 
 }

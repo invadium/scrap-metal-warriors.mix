@@ -10,8 +10,9 @@ function mouseDown(e) {
         lab.pick(e.x, e.y, ls, n => n instanceof dna.zone.Mech)
 
         if (ls.length > 0) {
-            log(ls[0] instanceof dna.zone.Mech)
             ls[0].controller.capture()
+        } else {
+            job.monitor.controller.releaseAll()
         }
     }
     if (e.button === 0 && e.ctrlKey) {

@@ -11,9 +11,6 @@ class Mech extends Platform {
             w:   20,
             h:   50,
 
-            health:    70,
-            maxHealth: 100,
-
             timestamp: env.time,
         }, st) )
 
@@ -120,7 +117,7 @@ class Mech extends Platform {
 
     hit(hitter, targetSolid, force) {
         this.health.damage(force)
-        log('got hit by ' + (hitter.name || hitter.getTitle()) + ' with ' + force + ' health: ' + this.health.hits)
+        // log('got hit by ' + (hitter.name || hitter.getTitle()) + ' with ' + force + ' health: ' + this.health.hits)
     }
 
     /*
