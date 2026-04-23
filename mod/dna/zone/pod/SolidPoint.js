@@ -15,7 +15,13 @@ class SolidPoint extends Solid {
 
     draw() {
         if (!env.showSolids) return
-        fill('#FF8000')
-        circle(this.x, this.y, 2)
+        
+        const __ = this.__
+        switch(__.state) {
+            case 1: fill('#ffff00'); break;
+            case 2: fill('#ff0000'); break;
+            case 3: fill('#00ffff'); break;
+        }
+        circle(this.x, this.y, 3)
     }
 }

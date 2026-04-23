@@ -107,7 +107,7 @@ class Mech extends Platform {
     }
 
     hit(hitter) {
-        log('got hit by ' + (hitter.name || hitter.getTitle()))
+        // log('got hit by ' + (hitter.name || hitter.getTitle()))
     }
 
     /*
