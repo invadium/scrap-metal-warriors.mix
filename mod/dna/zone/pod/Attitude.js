@@ -4,9 +4,9 @@ class Attitude {
         augment(this, {
             name: 'attitude',
 
-            acceleration: 100,
-            maxSpeed:     120,
-            jumpForce:    100,
+            acceleration: env.tune.mech.baseAcceleration,
+            maxSpeed:     env.tune.mech.maxSpeed,
+            jumpForce:    env.tune.mech.jumpForce,
         }, st)
     }
 
@@ -24,6 +24,6 @@ class Attitude {
 
     jump(dt) {
         const mt = this.__.momentum
-        mt.jump(80)
+        mt.jump(this.jumpForce)
     }
 }

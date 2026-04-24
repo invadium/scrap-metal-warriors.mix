@@ -1,4 +1,4 @@
-const Entity = require('dna/zone/Entity')
+const Platform = require('dna/zone/Platform')
 
 const TRAVEL    = 1
 const PENETRATE = 2
@@ -10,7 +10,7 @@ const FADE_TIME = .75
 const REBOUND   = .5
 
 let id = 0
-class Projectile extends Entity {
+class Projectile extends Platform {
 
     constructor(st) {
         super( augment({

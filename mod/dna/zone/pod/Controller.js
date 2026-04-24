@@ -28,9 +28,9 @@ class Controller {
     }
 
     actuate(action) {
-        // console.dir(action)
+        const attitude = this.__.attitude
         switch(action.name) {
-            case 'UP': this.__.momentum.jump(80); break;
+            case 'UP': attitude.jump(); break;
         }
     }
 

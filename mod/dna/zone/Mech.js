@@ -1,8 +1,8 @@
 let id = 0
 
-const Platform = require('dna/zone/Platform')
+const TurnablePlatform = require('dna/zone/TurnablePlatform')
 
-class Mech extends Platform {
+class Mech extends TurnablePlatform {
 
     constructor(st) {
         super( augment({

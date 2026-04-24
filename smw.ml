@@ -27,9 +27,9 @@ V projectile
     V projectile damage
     V multi-segment tracers
     > culling
+> base
 > scrap metal
 > scrap orbital rain
-> base
 > teams
 > component hit with bubbling damage
 > build a bot button

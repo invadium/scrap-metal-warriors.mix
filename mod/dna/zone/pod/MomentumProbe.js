@@ -13,27 +13,15 @@ class MomentumProbe {
     }
 
     draw() {
-        if (!env.debug) return
+        if (!env.debug || !env.showMomentum) return
         // assume we are at the body's origin
         save()
-
-        if (this.__.surfaced) {
             const sV = this.__.momentum.speedV
-
-            stroke('#ff8000')
-            lineWidth(2)
-            line(0, 0, sV[0], 0)
-            line(0, 0, 0, -sV[1])
-
-        } else {
-            const sV = this.__.momentum.speedV
-            rotate(-this.__.dir)
+            if (this.__.dir < 0) scale(-1, 1)
 
             stroke('#ff8000')
             lineWidth(2)
             line(0, 0, sV[0], sV[1])
-        }
-
         restore()
     }
 
