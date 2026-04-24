@@ -46,27 +46,32 @@ function create() {
         y:    60,
     })
 
+    // === scrap ===
+    zone.spawn('Scrap', {
+        team: 1,
+        x:    250,
+        y:    400,
+    })
+
     // === mechs ===
     zone.spawn('Mech', {
         team: 1,
-        x:    100,
+        x:    250,
         y:    25,
-        timestamp: 1.5,
     })
 
     zone.spawn('Mech', {
         team: 0,
-        x:    150,
+        x:    300,
         y:    120,
-        timestamp: 4.5,
     })
 
     zone.spawn('Mech', {
         team:  2,
         dir:  -1,
-        x:     200,
+        x:     400,
+
         y:    -70,
-        timestamp: 6.6,
     })
 
 
@@ -74,14 +79,12 @@ function create() {
         team: 1,
         x:    1000,
         y:    25,
-        timestamp: 1.5,
     })
 
     zone.spawn('Mech', {
         team: 0,
         x:    1200,
         y:    120,
-        timestamp: 4.5,
     })
 
     zone.spawn('Mech', {
@@ -89,7 +92,6 @@ function create() {
         dir:  -1,
         x:     1400,
         y:    -70,
-        timestamp: 6.6,
     })
 
     if (env.debug) this.debug(zone)

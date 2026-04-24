@@ -11,6 +11,8 @@ class Base extends TurnablePlatform {
 
             w:   160,
             h:   120,
+
+            timestamp: env.time + 17 * rnd(),
         }, st) )
         const base = this
 
@@ -21,8 +23,6 @@ class Base extends TurnablePlatform {
                 x: 0,
                 y: 0,
                 r: 60,
-
-                timestamp: env.time,
             }),
         ])
 
@@ -36,13 +36,11 @@ class Base extends TurnablePlatform {
                 y: 0,
             },
         }) )
-        /*
         bodyJoint.attachKey({
             evo: function(dt) {
                 bodyJoint.y = bodyJoint.mount.y + 2.5 * sin((env.time - base.timestamp) * 1.2)
             }
         })
-        */
         this.attach( new dna.zone.pod.TeamBlock({
             joint: bodyJoint,
             w: 160,

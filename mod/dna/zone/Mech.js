@@ -7,14 +7,14 @@ class Mech extends TurnablePlatform {
     constructor(st) {
         id ++
         super( augment({
-            Z:    101 + id,
+            Z:     2000 + id,
             name: 'mech' + id,
             team: 0,
 
             w:   20,
             h:   50,
 
-            timestamp: env.time,
+            timestamp: env.time + 27 * rnd(),
         }, st) )
 
         const mech = this
