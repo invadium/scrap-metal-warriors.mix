@@ -42,16 +42,12 @@ class Momentum {
     accelerateClamped(dir, maxSpeed, dt) {
         const __ = this.__
         const speedV = this.speedV
+        if ( abs(speedV[0]) > maxSpeed) return
+
         const dx = dir[0] * dt
         const dy = dir[1] * dt
         speedV[0] += dx
         speedV[1] += dy 
-
-        const speed = math.length( speedV[0], speedV[1] )
-        if (speed > maxSpeed) {
-            speedV[0] = (speedV[0] / speed) * maxSpeed
-            speedV[1] = (speedV[1] / speed) * maxSpeed
-        }
 
         // reflect this acceleration change in the platform's direction
         if (dx < 0) {

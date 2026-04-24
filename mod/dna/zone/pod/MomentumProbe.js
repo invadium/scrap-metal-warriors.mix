@@ -18,6 +18,9 @@ class MomentumProbe {
         save()
             const sV = this.__.momentum.speedV
             if (this.__.dir < 0) scale(-1, 1)
+            const angle = bearing(sV[0], sV[1])
+            const len = math.length(sV[0], sV[1])
+            rotate(angle)
 
             stroke('#ff8000')
             lineWidth(2)
