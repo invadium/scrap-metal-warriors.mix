@@ -17,108 +17,192 @@ class Mech extends TurnablePlatform {
             timestamp: env.time + 27 * rnd(),
         }, st) )
 
-        const mech = this
+        // === Blueprint Construction ===
+        const _ = this
+        _.blueprint = _.blueprint || env.blueprint.battleMech
+        const blueprint = _.blueprint
 
-        this.attachAll([
+        // install common pods for physics and control
+        _.attachAll([
+            // physics
             new dna.zone.pod.Momentum(),
             new dna.zone.pod.Attitude(),
-            new dna.zone.pod.GravityEffect(),
-
             new dna.zone.pod.Collider(),
-            new dna.zone.pod.SolidCircle({
-                x: 0,
-                y: 0,
-                r: 20,
-            }),
 
-            new dna.zone.pod.RandomActionBot(),
+            // controllers
             new dna.zone.pod.Controller(),
             new dna.zone.pod.SelectionHint(),
         ])
 
-        // skeleton
-        const skeleton = this.attach( new dna.zone.pod.Skeleton() )
+        // form the selected chasis and install components
+        function formBipod() {
+            _.attachAll([
+                new dna.zone.pod.GravityEffect(),
+            ])
 
-        // body
-        const bodyJoint = skeleton.attach( new dna.zone.pod.Joint({
-            mount: {
+            // form skeleton
+            const skeleton = _.attach( new dna.zone.pod.Skeleton() )
+
+            // body
+            const bodyJoint = skeleton.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 0,
+                    y: 0,
+                },
+            }) )
+            bodyJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.y = joint.mount.y + 2.5 * sin((env.time - mech.timestamp) * 1.2)
+                }
+            })
+            _.attach( new dna.zone.pod.TeamBlock({
+                joint: bodyJoint,
+                w: 20,
+                h: 40,
+                color: hsl(.50, .4, .4)
+            }) )
+            _.attach( new dna.zone.pod.SolidCircle({
                 x: 0,
                 y: 0,
-            },
-        }) )
-        bodyJoint.attachKey({
-            evo: function(dt) {
-                bodyJoint.y = bodyJoint.mount.y + 2.5 * sin((env.time - mech.timestamp) * 1.2)
-            }
-        })
-        this.attach( new dna.zone.pod.TeamBlock({
-            joint: bodyJoint,
-            w: 20,
-            h: 40,
-            color: hsl(.50, .4, .4)
-        }) )
+                r: 20,
+            }) )
 
-        // head
-        const headJoint = bodyJoint.attach( new dna.zone.pod.Joint({
-            mount: {
-                x: 7,
-                y: 25,
-            }
-        }) )
-        headJoint.attachKey({
-            evo: function(dt) {
-                const joint = this.__
-                joint.x = joint.mount.x + 1.5 * sin((env.time - mech.timestamp) * 1.7)
-            }
-        })
-        this.attach( new dna.zone.pod.JointBlock({
-            joint: headJoint,
-            w: 20,
-            h: 20,
-            color: hsl(.66, .4, .4),
-        }) )
+            // head
+            const headJoint = bodyJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 7,
+                    y: 25,
+                }
+            }) )
+            headJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.x = joint.mount.x + 1.5 * sin((env.time - mech.timestamp) * 1.7)
+                }
+            })
+            _.attach( new dna.zone.pod.JointBlock({
+                joint: headJoint,
+                w: 20,
+                h: 20,
+                color: hsl(.66, .4, .4),
+            }) )
 
-        // gun
-        const gunJoint = bodyJoint.attach( new dna.zone.pod.Joint({
-            mount: {
-                x: 15,
-                y: 5,
-            },
-        }) )
-        gunJoint.attachKey({
-            evo: function(dt) {
-                const joint = this.__
-                joint.y = joint.mount.y + 1.5 * sin((env.time - mech.timestamp) * 4)
-            }
-        })
-        this.attach( new dna.zone.pod.JointBlock({
-            joint: gunJoint,
-            w: 25,
-            h: 5,
-        }) )
+            // gun -- TODO follow the blueprint
+            const gunJoint = bodyJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 15,
+                    y: 5,
+                },
+            }) )
+            gunJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.y = joint.mount.y + 1.5 * sin((env.time - mech.timestamp) * 4)
+                }
+            })
+            _.attach( new dna.zone.pod.JointBlock({
+                joint: gunJoint,
+                w: 25,
+                h: 5,
+            }) )
 
-        const barrelJoint = gunJoint.attach( new dna.zone.pod.Joint({
-            mount: {
-                x: 15,
+            const barrelJoint = gunJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 15,
+                    y: 0,
+                },
+            }) )
+            _.attach( new dna.zone.pod.Gun({
+                joint: barrelJoint,
+            }) )
+
+            _.attach( new dna.zone.pod.RandomWalkBot() )
+        }
+
+        function formHovercraft() {
+            _.attachAll([
+            //    new dna.zone.pod.GravityEffect(),
+            ])
+            _.attitude.maxSpeed = env.tune.mech.maxAirSpeed
+
+            // form skeleton
+            const skeleton = _.attach( new dna.zone.pod.Skeleton() )
+            _.w = 50
+            _.h = 20
+
+            // body
+            const bodyJoint = skeleton.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 0,
+                    y: 0,
+                },
+            }) )
+            bodyJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.y = joint.mount.y + 5 * sin((env.time - mech.timestamp) * 1.5)
+                }
+            })
+            _.attach( new dna.zone.pod.TeamBlock({
+                joint: bodyJoint,
+                w: 50,
+                h: 20,
+                color: hsl(.50, .4, .4)
+            }) )
+            _.attach( new dna.zone.pod.SolidCircle({
+                x: 0,
                 y: 0,
-            },
-        }) )
-        this.attach( new dna.zone.pod.Gun({
-            joint: barrelJoint,
-        }) )
+                r: 20,
+            }) )
 
+            // head
+            const headJoint = bodyJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 0,
+                    y: 20,
+                }
+            }) )
+            headJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.x = joint.mount.x + 1.5 * sin((env.time - mech.timestamp) * 1.7)
+                }
+            })
+            _.attach( new dna.zone.pod.JointBlock({
+                joint: headJoint,
+                w: 20,
+                h: 20,
+                color: hsl(.66, .4, .4),
+            }) )
+
+            _.attach( new dna.zone.pod.RandomHoverBot() )
+        }
+
+        switch(blueprint.chasis) {
+            case 'bipod':      formBipod();         break;
+            case 'hovercraft': formHovercraft();    break;
+            default: throw new Error(`unknown chasis type: ${blueprint.chasis}`)
+        }
 
         // health in the end to recalculate hit points
-        this.attach( new dna.zone.pod.Health({
+        _.attach( new dna.zone.pod.Health({
             hits: 100,
         }) )
 
-
-        if (env.showJoints) {
-            this.attach( new dna.zone.pod.SkeletonProbe() )
-        }
-        if (env.showMomentum) {
-            this.attach( new dna.zone.pod.MomentumProbe() )
+        // === DEBUG PODS ===
+        if (env.debug) {
+            if (env.showJoints) {
+                _.attach( new dna.zone.pod.SkeletonProbe() )
+            }
+            if (env.showMomentum) {
+                _.attach( new dna.zone.pod.MomentumProbe() )
+            }
         }
     }
 

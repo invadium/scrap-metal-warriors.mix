@@ -18,12 +18,6 @@ class JointBlock {
 
         fill(color)
         rect(x - .5*w, y - .5*h, w, h)
-
-        if (env.showAnchors) {
-            lineWidth(1)
-            stroke(env.style.color.debug.subAnchor)
-            rect(x-2, y-2, 4, 4)
-        }
     }
 
 }

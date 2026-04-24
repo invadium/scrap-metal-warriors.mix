@@ -8,6 +8,7 @@ class Skeleton extends Joint {
             name: 'skeleton',
             skeleton: null,
         }, st) )
+        this.skeleton = this
     }
 
     sx(lx) {

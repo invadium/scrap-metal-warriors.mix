@@ -1,10 +1,12 @@
-class RandomActionBot {
+const ACTIONS = 4
+
+class RandomHoverBot {
 
     constructor(st) {
         augment(this, {
             type:  'bot',
             alias: 'bot',
-            name:  'randomActionBot',
+            name:  'randomHoverBot',
 
             paused: false,
             action: 'idle',
@@ -26,14 +28,14 @@ class RandomActionBot {
             case 1:  return 'moveLeft';
             case 2:  return 'moveRight';
             case 3:  return 'jump';
-            case 4:  return 'fire';
+            case 4:  return 'moveDown';
             default: return 'unknown';
         }
     }
 
     selectNextAction() {
-        this.action = this.idToAction( RND(0, 4) )
-        this.expire = env.time + 1 + 5 * rnd()
+        this.action = this.idToAction( RND(0, ACTIONS) )
+        this.expire = env.time + 1 + 3 * rnd()
     }
 
     evo(dt) {
@@ -46,8 +48,9 @@ class RandomActionBot {
             case 'idle':                            break;
             case 'moveLeft':  attitude.left(dt);    break;
             case 'moveRight': attitude.right(dt);   break;
-            case 'jump':      attitude.jump(dt);    break;
-            case 'fire':      __.gun.fire(dt);      break;
+            //case 'jump':      attitude.jump(dt);    break;
+            case 'jump':                            break;
+            case 'moveDown':                        break;
         }
     }
 

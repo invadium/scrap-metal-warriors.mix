@@ -9,6 +9,8 @@ class Scrap extends TurnablePlatform {
             Z:     1000 + id,
             name: 'scrap' + id,
 
+            type: 0,
+
             w:   30,
             h:   20,
 
@@ -17,7 +19,10 @@ class Scrap extends TurnablePlatform {
         const scrap = this
 
         this.attachAll([
-            new dna.zone.pod.Momentum(),
+            new dna.zone.pod.Momentum({
+                mass:  1,
+                jumpy: true,
+            }),
             new dna.zone.pod.GravityEffect(),
 
             new dna.zone.pod.Collider(),

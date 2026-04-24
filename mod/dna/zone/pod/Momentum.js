@@ -5,6 +5,7 @@ class Momentum {
             type:     'physics',
             name:     'momentum',
             mass:      1,
+            jumpy:     false,
             speedV:    [0, 0],
         }, st)
     }
@@ -95,7 +96,11 @@ class Momentum {
         // ground collision
         if (this.isTouchingGround()) {
             this.land()
-            sV[1] = 0
+            if (this.jumpy) {
+                sV[1] = -.5 * sV[1]
+            } else {
+                sV[1] = 0
+            }
             // TODO land sfx
         }
         // edges collision

@@ -25,12 +25,17 @@ class Controller {
     }
 
     act(action, dt) {
-        const attitude = this.__.attitude
+        const __ = this.__
+        const attitude = __.attitude
         switch(action.name) {
             case 'LEFT':  attitude.left(dt);    break;
             case 'RIGHT': attitude.right(dt);   break;
 
-            case 'A':     this.__.gun.fire(dt); break;
+            case 'A':
+                if (__.gun) {
+                    __.gun.fire(dt)
+                }
+                break
         }
     }
 

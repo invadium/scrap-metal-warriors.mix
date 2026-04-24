@@ -12,7 +12,7 @@ class SelectionHint {
         const __ = this.__
         const { w, h } = __
         if (!__.controller._selected) {
-            if (!__.bot.paused) {
+            if (__.bot && !__.bot.paused) {
                 fill('#ff0000')
                 
                 const bx = .5*w

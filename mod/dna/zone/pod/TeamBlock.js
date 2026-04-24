@@ -19,12 +19,6 @@ class TeamBlock extends JointBlock {
 
         fill( env.style.color.team[team] )
         rect( x - .5*w, y - .2*h, w, .55*h )
-
-        if (env.showAnchors) {
-            lineWidth(1)
-            stroke(env.style.color.debug.subAnchor)
-            rect(x-2, y-2, 4, 4)
-        }
     }
 
 }

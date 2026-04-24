@@ -30,6 +30,7 @@ const tune = {
     mech: {
         baseAcceleration: 240,
         maxSpeed:         80,
+        maxAirSpeed:      50,
         jumpForce:        120,
     },
 }
