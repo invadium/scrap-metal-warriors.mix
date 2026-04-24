@@ -41,12 +41,23 @@ class Controller {
         if (!this._selected) return
         const __ = this.__
 
+        // adjust the camera if needed
+        // TODO move to a separate TrackWithCamera? TBD pod
         const sx = pin.cam.ux(__.x),
               sy = pin.cam.uy(__.y)
 
         const edge = ctx.width * this.followThreshold
         if (sx < edge || sx > ctx.width - edge) {
-            pin.cam.targetingPod.rollTo(__.x)
+            const sV = this.__.momentum.speedV
+            const shift = .5 * (pin.cam.view.getWidth() - 2*edge)
+
+            if (sV[0] < 0) {
+                pin.cam.targetingPod.rollTo(__.x - shift)
+            } else if (sV[0] > 0) {
+                pin.cam.targetingPod.rollTo(__.x + shift)
+            } else {
+                pin.cam.targetingPod.rollTo(__.x)
+            }
         }
     }
 
