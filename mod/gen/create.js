@@ -34,6 +34,19 @@ function create() {
     $.cam = pin.cam = cam1
     defer(() => cam1.targetingPod.rollTo(200, 'setup'), 1)
 
+    // === bases ===
+    zone.spawn('Base', {
+        team: 1,
+        x:    env.tune.base.shift,
+        y:    60,
+    })
+    zone.spawn('Base', {
+        team: 2,
+        x:    zone.width - env.tune.base.shift,
+        y:    60,
+    })
+
+    // === mechs ===
     zone.spawn('Mech', {
         team: 1,
         x:    100,

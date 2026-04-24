@@ -9,9 +9,9 @@ class ElasticTargetingPod {
                 y:    0,
                 zoom: 1,
             },
-            slideSpeed:          600,
+            slideSpeed:          env.tune.cam.slideSpeed,
             zoomingPrecision:   .1,
-            targetingPrecision:  5,
+            targetingPrecision:  env.tune.cam.targetingPrecision,
         })
     }
 

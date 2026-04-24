@@ -5,6 +5,7 @@ class TurnablePlatform extends Platform {
 
     constructor(st) {
         super( augment({
+            team:  0,
 
             w:     0,
             h:     0,

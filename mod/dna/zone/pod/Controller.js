@@ -13,18 +13,8 @@ class Controller {
         // log(this.__.name + ' captured!')
     }
 
-    onBind() {
-        this._selected = true
-        this.__.bot.disable()
-    }
-
     release() {
         job.monitor.controller.releaseAll()
-    }
-
-    onRelease() {
-        this._selected = false
-        this.__.bot.enable()
     }
 
     actuate(action) {
@@ -58,5 +48,20 @@ class Controller {
         if (sx < edge || sx > ctx.width - edge) {
             pin.cam.targetingPod.rollTo(__.x)
         }
+    }
+
+    onBind() {
+        this._selected = true
+        this.__.bot.disable()
+    }
+
+    onRelease() {
+        this._selected = false
+        this.__.bot.enable()
+    }
+
+    onKill() {
+        if (!this._selected) return
+        this.release()
     }
 }

@@ -1,6 +1,6 @@
-const Block = require('dna/zone/pod/Block')
+const JointBlock = require('dna/zone/pod/JointBlock')
 
-class TeamBlock extends Block {
+class TeamBlock extends JointBlock {
 
     constructor(st) {
         super( augment({

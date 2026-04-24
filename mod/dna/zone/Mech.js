@@ -5,8 +5,10 @@ const TurnablePlatform = require('dna/zone/TurnablePlatform')
 class Mech extends TurnablePlatform {
 
     constructor(st) {
+        id ++
         super( augment({
-            name: 'mech' + (++id),
+            Z:    101 + id,
+            name: 'mech' + id,
             team: 0,
 
             w:   20,
@@ -20,7 +22,6 @@ class Mech extends TurnablePlatform {
         this.attachAll([
             new dna.zone.pod.Momentum(),
             new dna.zone.pod.Attitude(),
-            new dna.zone.pod.MomentumProbe(),
             new dna.zone.pod.GravityEffect(),
 
             new dna.zone.pod.Collider(),
@@ -70,7 +71,7 @@ class Mech extends TurnablePlatform {
                 joint.x = joint.mount.x + 1.5 * sin((env.time - mech.timestamp) * 1.7)
             }
         })
-        this.attach( new dna.zone.pod.Block({
+        this.attach( new dna.zone.pod.JointBlock({
             joint: headJoint,
             w: 20,
             h: 20,
@@ -90,7 +91,7 @@ class Mech extends TurnablePlatform {
                 joint.y = joint.mount.y + 1.5 * sin((env.time - mech.timestamp) * 4)
             }
         })
-        this.attach( new dna.zone.pod.Block({
+        this.attach( new dna.zone.pod.JointBlock({
             joint: gunJoint,
             w: 25,
             h: 5,
@@ -115,6 +116,9 @@ class Mech extends TurnablePlatform {
 
         if (env.showJoints) {
             this.attach( new dna.zone.pod.SkeletonProbe() )
+        }
+        if (env.showMomentum) {
+            this.attach( new dna.zone.pod.MomentumProbe() )
         }
     }
 
@@ -148,6 +152,12 @@ class Mech extends TurnablePlatform {
 
     }
     */
+
+    onKill() {
+        this._ls.forEach(pod => {
+            if (isFun(pod.onKill)) pod.onKill()
+        })
+    }
 
     getStatus() {
         return `mech [${this.name}]`

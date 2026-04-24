@@ -1,5 +1,5 @@
 let id = 0
-class Block {
+class JointBlock {
 
     constructor(st) {
         augment(this, {

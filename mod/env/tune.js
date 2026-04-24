@@ -7,6 +7,15 @@ const tune = {
     guaranteedVerticalSpan: 200, // TODO calc the proper zoom to target
     mouseSlideArea: .05,
 
+    cam: {
+        slideSpeed: 1000,
+        targetingPrecision: 5,
+    },
+
+    base: {
+        shift: 120, 
+    },
+
     mech: {
         baseAcceleration: 240,
         maxSpeed:         80,
