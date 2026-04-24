@@ -18,7 +18,8 @@ class ElasticTargetingPod {
     rollTo(x, caller) {
         const __   = this.__
         const rt   = this.rollTarget
-        x = clamp(x, 0, lab.zone.width)
+        const overshoot = env.tune.cam.overshoot * __.view.getWidth()
+        x = clamp(x, overshoot, lab.zone.width - overshoot)
 
         const yshift = __.ly((.5 - env.tune.groundLevel) * ctx.height) - __.view.y
 

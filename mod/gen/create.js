@@ -5,7 +5,7 @@ function create() {
     const zone = lab.touch('zone', {
         Z:      21,
         hidden: true,
-        width:  2000,  // TODO take it from the main menu config
+        width:  env.tune.zone.width,
     })
     const ports = lab.touch('ports', {
         Z: 27,
@@ -21,7 +21,7 @@ function create() {
 
         view: {
             x:     0,
-            y:     250,
+            y:     450,
             zoom:  2,
             flipY: true,
         },
@@ -48,7 +48,6 @@ function create() {
 
     // === scrap ===
     zone.spawn('Scrap', {
-        team: 1,
         x:    250,
         y:    400,
     })

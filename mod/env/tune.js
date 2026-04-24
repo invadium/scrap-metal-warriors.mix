@@ -1,5 +1,5 @@
 const tune = {
-    gravity:       220,
+    gravity:       160,
     friction:      160,
     airResistance: 60,
 
@@ -10,6 +10,11 @@ const tune = {
     cam: {
         slideSpeed:         1000,
         targetingPrecision: 5,
+        overshoot:          .25,  // slide overshoot in the screen sizes
+    },
+
+    zone: {
+        width: 2000, // TODO take it from the main menu config
     },
 
     base: {
@@ -17,13 +22,14 @@ const tune = {
     },
 
     scrap: {
-        FQ:    15,   // scrap rain frequency in pieces per minute
-        limit: 45,   // max pieces per zone
+        FQ:     5,    // scrap rain frequency in pieces per minute
+        limit:  16,   // max pieces per zone
+        margin: 250,
     },
 
     mech: {
         baseAcceleration: 240,
         maxSpeed:         80,
-        jumpForce:        160,
+        jumpForce:        120,
     },
 }

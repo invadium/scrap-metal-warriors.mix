@@ -27,11 +27,11 @@ V projectile
     V projectile damage
     V multi-segment tracers
     > culling
-> base
-> scrap metal
-> scrap orbital rain
-> teams
-> component hit with bubbling damage
+V base
+V scrap metal
+V scrap orbital rain
+V teams
+V damage
 > build a bot button
 V limit mech max speed
 
