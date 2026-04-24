@@ -31,7 +31,6 @@ class Mech extends TurnablePlatform {
 
             // controllers
             new dna.zone.pod.Controller(),
-            new dna.zone.pod.SelectionHint(),
         ])
 
         // form the selected chasis and install components
@@ -90,6 +89,20 @@ class Mech extends TurnablePlatform {
                 color: hsl(.66, .4, .4),
             }) )
 
+            // eye
+            const eyeJoint = headJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 9,
+                    y: 2,
+                }
+            }) )
+            _.attach( new dna.zone.pod.JointBlock({
+                joint: eyeJoint,
+                w: 4,
+                h: 4,
+                color:'#3faede',
+            }) )
+
             // gun -- TODO follow the blueprint
             const gunJoint = bodyJoint.attach( new dna.zone.pod.Joint({
                 mount: {
@@ -123,7 +136,12 @@ class Mech extends TurnablePlatform {
             _.attach( new dna.zone.pod.HealthBar({
                 w: _.w,
                 x: 0,
-                y: .9 * _.h,
+                y: .8 * _.h,
+            }) )
+            _.attach( new dna.zone.pod.SelectionHint({
+                joint: bodyJoint,
+                w: 50,
+                h: 64,
             }) )
 
             _.attach( new dna.zone.pod.RandomWalkBot() )
@@ -137,7 +155,7 @@ class Mech extends TurnablePlatform {
 
             // form skeleton
             const skeleton = _.attach( new dna.zone.pod.Skeleton() )
-            _.w = 35
+            _.w = 50
             _.h = 25
 
             // body
@@ -187,10 +205,29 @@ class Mech extends TurnablePlatform {
                 color: hsl(.66, .4, .4),
             }) )
 
-            _.attach( new dna.zone.pod.HealthBar({
+            // eye
+            const eyeJoint = headJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 9,
+                    y: 2,
+                }
+            }) )
+            _.attach( new dna.zone.pod.JointBlock({
+                joint: eyeJoint,
+                w: 4,
+                h: 4,
+                color:'#3faede',
+            }) )
+
+            const hb = _.attach( new dna.zone.pod.HealthBar({
                 w: _.w,
                 x: 0,
                 y: 1.7 * _.h,
+            }) )
+            _.attach( new dna.zone.pod.SelectionHint({
+                joint: bodyJoint,
+                w: 60,
+                h: 50,
             }) )
 
             _.attach( new dna.zone.pod.RandomHoverBot() )
