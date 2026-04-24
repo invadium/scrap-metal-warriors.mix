@@ -2,7 +2,7 @@ let id = 0
 
 // Represents a recepe on how to build a mech
 //
-// * chasis - bipod or hover
+// * chassis - bipod or hover
 // * tools or weapons - gun or magnet/tractor-beam?
 // ------------------------------------------------
 // * ammo?
@@ -16,7 +16,7 @@ class Blueprint {
         augment(this, {
             name: 'blueprint' + (++id),
 
-            chasis: 'bipod', // hovercraft, tracks
+            chassis: 'bipod', // hovercraft, tracks
             pods: [],
         }, st)
     }

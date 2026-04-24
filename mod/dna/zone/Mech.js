@@ -120,6 +120,12 @@ class Mech extends TurnablePlatform {
                 joint: barrelJoint,
             }) )
 
+            _.attach( new dna.zone.pod.HealthBar({
+                w: _.w,
+                x: 0,
+                y: .9 * _.h,
+            }) )
+
             _.attach( new dna.zone.pod.RandomWalkBot() )
         }
 
@@ -131,8 +137,8 @@ class Mech extends TurnablePlatform {
 
             // form skeleton
             const skeleton = _.attach( new dna.zone.pod.Skeleton() )
-            _.w = 50
-            _.h = 20
+            _.w = 35
+            _.h = 25
 
             // body
             const bodyJoint = skeleton.attach( new dna.zone.pod.Joint({
@@ -181,6 +187,12 @@ class Mech extends TurnablePlatform {
                 color: hsl(.66, .4, .4),
             }) )
 
+            _.attach( new dna.zone.pod.HealthBar({
+                w: _.w,
+                x: 0,
+                y: 1.7 * _.h,
+            }) )
+
             _.attach( new dna.zone.pod.RandomHoverBot() )
         }
 
@@ -222,15 +234,6 @@ class Mech extends TurnablePlatform {
         fill(.75, .4, .4)
         rect(-.5*w, .5*h, w, h)
 
-        // health bar
-        const H = this.health / this.maxHealth
-        const bx = -.5 * w
-        translate(0, .4*h)
-        lineWidth(5)
-        stroke('#ff4020')
-        line(bx, 0, bx + w, 0)
-        stroke('#40ff60')
-        line(bx, 0, bx + w * H, 0)
 
         restore()
 
