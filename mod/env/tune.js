@@ -40,9 +40,9 @@ const tune = {
         maxSpeed:         40,
         jumpForce:        120,
         maxAirSpeed:      30,
-        ascendForce:      150,
-        descendForce:     200,
-        levelForce:       250,
+        ascendForce:      120,
+        descendForce:     160,
+        levelForce:       200,
         cruiseAlt:        150,
     },
 }

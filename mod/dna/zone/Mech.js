@@ -37,6 +37,11 @@ class Mech extends TurnablePlatform {
             new dna.zone.pod.Controller(),
         ])
 
+        // TODO launch hits recalculation based on the composition?
+        _.attach( new dna.zone.pod.Health({
+            hits: 100,
+        }) )
+
         // form the selected chasis and install components
         function formBipod() {
             _.attachAll([
@@ -260,6 +265,7 @@ class Mech extends TurnablePlatform {
                 joint: hookJoint
             }) )
 
+
             _.attach( new dna.zone.pod.CollectorBot() )
             //_.attach( new dna.zone.pod.RandomHoverBot() )
             if (env.showActions) {
@@ -268,6 +274,11 @@ class Mech extends TurnablePlatform {
                     y: 44,
                 }) )
             }
+
+            // adjust health
+            // TODO should be done automatically based on the composition
+            _.health.hits = 40
+            _.health.maxHits = 40
         }
 
         switch(blueprint.chasis) {
@@ -275,11 +286,6 @@ class Mech extends TurnablePlatform {
             case 'hovercraft': formHovercraft();    break;
             default: throw new Error(`unknown chasis type: ${blueprint.chasis}`)
         }
-
-        // health in the end to recalculate hit points
-        _.attach( new dna.zone.pod.Health({
-            hits: 100,
-        }) )
 
         // === DEBUG PODS ===
         if (env.debug) {

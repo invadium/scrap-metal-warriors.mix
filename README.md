@@ -15,6 +15,7 @@ Use the following flags to highlight a system of interest:
 --showMomentum
 --showActions - show names, actions and reasoning
 --enableOrbitalBattle - rain down mechs for each base along with scrap metal
+--traceMetals
 ```
 
 You can set them directly on ```env``:

@@ -14,7 +14,7 @@ class Stock {
         const qty = 1
         this.metal += qty
         kill(scrap)
-        log(`${this.__.name} metal: ${this.metal}(${qty})`)
+        log(`${this.__.name} metal: ${this.metal}(+${qty})`)
     }
 
     use(qty) {

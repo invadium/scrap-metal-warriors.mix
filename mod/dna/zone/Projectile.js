@@ -173,4 +173,6 @@ class Projectile extends Platform {
 Projectile.TRAVEL    = TRAVEL
 Projectile.PENETRATE = PENETRATE
 Projectile.FADE      = FADE
-
+Projectile.reset = function() {
+    id = 0
+}

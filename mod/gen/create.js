@@ -26,7 +26,7 @@ function create() {
         name: 'cam1',
 
         view: {
-            x:     0,
+            x:     .5 * zone.width,
             y:     450,
             zoom:  2,
             flipY: true,

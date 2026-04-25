@@ -89,3 +89,6 @@ class Base extends TurnablePlatform {
         trap('gameOver', this.team)
     }
 }
+Base.reset = function() {
+    id = 0
+}

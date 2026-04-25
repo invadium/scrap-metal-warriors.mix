@@ -10,7 +10,7 @@ class Factory {
     reserveMetal(qty) {
         if (this.__.stock.use(qty)) return true
 
-        log(`[${this.__.name}/factory] no metals!`)
+        if (env.traceMetals) log(`[${this.__.name}/factory] skip build - no metals!`)
         return false
     }
 
@@ -35,11 +35,17 @@ class Factory {
 
     buildCollector() {
         const mech = this.build( env.blueprint.collector, 7 )
-        if (mech) mech.y = 120
+        if (mech) {
+            mech.y = 120
+            log(`[${this.__.name}/factory] spawn new collector!`)
+        }
     }
 
     buildBattleMech() {
         const mech = this.build( env.blueprint.battleMech, 5 )
+        if (mech) {
+            log(`[${this.__.name}/factory] spawn new battle mech!`)
+        }
     }
 
 }
