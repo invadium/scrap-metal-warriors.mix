@@ -29,14 +29,15 @@ class ActionProbe {
             fill('#ffff00')
             baseBottom()
             alignCenter()
-            font('14px pixel-operator')
 
             const dy = -12
             let by = 0
             if (bot.reason) {
+                font('10px pixel-operator')
                 text(bot.reason, 0, by)
-                by += dy
+                by += dy + 4
             }
+            font('14px pixel-operator')
             text(title, 0, by)
             by += dy
             text(`== ${__.name} ==`, 0, by)

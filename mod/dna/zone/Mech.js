@@ -117,6 +117,7 @@ class Mech extends TurnablePlatform {
                     const joint = this.__
                     const mech = joint.skeleton.__
                     joint.y = joint.mount.y + 1.5 * sin((env.time - mech.timestamp) * 4)
+                    joint.x = joint.mount.x + 2.5 * sin((env.time - mech.timestamp) * 2.5)
                 }
             })
             _.attach( new dna.zone.pod.JointBlock({

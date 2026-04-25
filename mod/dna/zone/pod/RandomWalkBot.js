@@ -1,6 +1,6 @@
-const Bot = require('dna/zone/pod/Bot')
+const ActionBot = require('dna/zone/pod/ActionBot')
 
-class RandomWalkBot extends Bot {
+class RandomWalkBot extends ActionBot {
 
     constructor(st) {
         super( augment({

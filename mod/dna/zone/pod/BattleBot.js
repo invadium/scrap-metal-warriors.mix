@@ -1,6 +1,6 @@
-const Bot = require('dna/zone/pod/Bot')
+const ActionBot = require('dna/zone/pod/ActionBot')
 
-class BattleBot extends Bot {
+class BattleBot extends ActionBot {
 
     constructor(st) {
         super( augment({
@@ -18,7 +18,6 @@ class BattleBot extends Bot {
                 break
             case 'advance':
                 if (this.targetEnemy()) {
-                    // got the enemy in front
                     const leftBias  = this.leftBias(2, .5)
                     const rightBias = this.rightBias(2, .5)
                     //const friendlyBias = this.friendlyBias(.2, 1)
@@ -33,12 +32,14 @@ class BattleBot extends Bot {
                         'jumpLeft',    .25 * leftBias,
                         'jumpRight',   .25 * rightBias,
                     ])
+                    this.target = this._lastTarget.name
 
                 } else if (this.turnForEnemy()) {
                     // got the enemy behind
                     __.dir = -__.dir
                     this.action = 'idle'
                     this.expire = env.time + 1
+                    this.target = '!' + this._lastTarget.name
 
                 } else {
                     // advance towards the enemy base
@@ -87,11 +88,15 @@ class BattleBot extends Bot {
     }
 
     targetEnemy() {
-        return this.__.scanner.detectFrontalEnemy()
+        const target = this.__.scanner.detectFrontalEnemy()
+        if (target) this._lastTarget = target
+        return target
     }
 
     turnForEnemy() {
-        return this.__.scanner.detectEnemyBehind()
+        const target = this.__.scanner.detectEnemyBehind()
+        if (target) this._lastTarget = target
+        return target
     }
 
     advance() {

@@ -13,7 +13,8 @@ Use the following flags to highlight a system of interest:
 --showBones
 --showSolids
 --showMomentum
---showActions
+--showActions - show names, actions and reasoning
+--enableOrbitalBattle - rain down mechs for each base along with scrap metal
 ```
 
 You can set them directly on ```env``:

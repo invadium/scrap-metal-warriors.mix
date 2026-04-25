@@ -1,11 +1,11 @@
-const Bot = require('dna/zone/pod/Bot')
+const ActionBot = require('dna/zone/pod/ActionBot')
 
 const IDLE    = 0
 const SURVEY  = 1
 const CAPTURE = 2
 const TUG     = 3
 
-class CollectorBot extends Bot {
+class CollectorBot extends ActionBot {
 
     constructor(st) {
         super( augment({
@@ -42,6 +42,7 @@ class CollectorBot extends Bot {
     drop() {
         this.__.hook.release()
         this.survey()
+        this.reason = 'dropped the payload, search for more'
     }
 
     survey() {
@@ -50,14 +51,19 @@ class CollectorBot extends Bot {
         this.action = 'idle'
     }
 
+    capture() {
+        this.state  = CAPTURE
+        this.goal   = 'capture'
+        this.action = 'descent'
+        this.expire = -1
+        this.__.hook.enable()
+        this.reason = 'found a scrap!'
+    }
+
     evoSurvey(dt) {
         const scanner = this.__.scanner
         if (scanner.sense(e => (e instanceof dna.zone.Scrap) && !e._delivered)) {
-            this.state  = CAPTURE
-            this.goal   = 'capture'
-            this.action = 'descent'
-            this.expire = -1
-            this.__.hook.enable()
+            this.capture()
         } else {
             if (env.time > this.expire) return this.selectSurveyAction()
         }

@@ -1,10 +1,10 @@
-class Bot {
+class ActionBot {
 
     constructor(st) {
         augment(this, {
             type:  'bot',
             alias: 'bot',
-            name:  'bot',
+            name:  'actionBot',
 
             action: 'idle',
             goal:   null,

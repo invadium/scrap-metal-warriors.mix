@@ -6,9 +6,6 @@ V basic collisions
 V direct mech controls
 V debug info
 V status bar
-> title bar
-> construction UI pop-up
-> pop-up lists
 
 
 ### Probe I
@@ -19,7 +16,8 @@ V mech
     V collector bot controller
     V scanner
     V scrap metal collector
-    > battle bot controller
+    V battle bot controller
+    > base bot controller
 V projectile
     V bullet hell layer
     V zombie frame pooling
@@ -35,14 +33,19 @@ V scrap orbital rain
 V teams
 V damage
 V limit mech max speed
-> build a bot button
 > ! mouse slide doesn't work when focus-sliding back on target
 
 
 ### System II
-> parallax background
+> title bar
+> hud layer
+> pop-up lists
+> build button
+> navigation buttons
+> construction UI pop-up
 > sfx
 > vfx
+> parallax background
 
 ### Proto II
 > select a new name!
