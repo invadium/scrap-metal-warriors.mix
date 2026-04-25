@@ -41,4 +41,8 @@ class TugPoint {
         this.hookJoint = hookJoint
     }
 
+    isHooked() {
+        return !!this.hookJoint
+    }
+
 }

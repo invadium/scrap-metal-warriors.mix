@@ -1,8 +1,9 @@
 const tune = {
-    gravity:       160,
-    friction:      160,
-    airResistance: 60,
-    reboundSpeed:  120,
+    gravity:         160,
+    friction:        160,
+    airResistance:   60,
+    hoverResistance: 100,
+    reboundSpeed:    120,
 
     groundLevel:            .25,
     guaranteedVerticalSpan:  200, // TODO calc the proper zoom to target
@@ -39,9 +40,9 @@ const tune = {
         maxSpeed:         40,
         jumpForce:        120,
         maxAirSpeed:      30,
-        ascendForce:      10,
-        descendForce:     15,
-        levelForce:       25,
+        ascendForce:      150,
+        descendForce:     200,
+        levelForce:       250,
         cruiseAlt:        150,
     },
 }

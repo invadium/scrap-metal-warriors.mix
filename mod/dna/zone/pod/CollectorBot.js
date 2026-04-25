@@ -11,6 +11,7 @@ class CollectorBot extends ActionBot {
         super( augment({
             name:  'collectorBot',
             cruiseAlt: env.tune.mech.cruiseAlt,
+            cruiseGap: 20,
         }, st) )
         this.survey()
     }
@@ -21,6 +22,13 @@ class CollectorBot extends ActionBot {
     }
 
     selectSurveyAction() {
+        if (this.__.hook.isEnabled()) {
+            debugger
+        }
+        if (abs(this.__.y - this.cruiseAlt) > this.cruiseGap) {
+            this.cruise()
+            return
+        }
         const d = rnd()
         if (d < .25) {
             this.action = 'idle'
@@ -32,6 +40,7 @@ class CollectorBot extends ActionBot {
     }
 
     doTug() {
+        if (!this.__.hook.isEnabled()) this.survey()
         this.state = TUG
         this.goal  = 'tug'
         if (this.__.scanner.retreatDir() < 0) this.action = 'moveLeft'
@@ -60,9 +69,23 @@ class CollectorBot extends ActionBot {
         this.reason = 'found a scrap!'
     }
 
+    cruise() {
+        this.action = 'cruise'
+        this.expire = -1
+        this.reason = 'cruising back to alt'
+    }
+
+    onCruiseAlt() {
+        if (this.state === CAPTURE) {
+            this.doTug()
+        } else {
+            this.selectSurveyAction()
+        }
+    }
+
     evoSurvey(dt) {
         const scanner = this.__.scanner
-        if (scanner.pingDown(e => (e instanceof dna.zone.Scrap) && !e._delivered)) {
+        if (scanner.pingDown(e => (e instanceof dna.zone.Scrap) && !e.tugPoint.isHooked() && !e._delivered)) {
             this.capture()
         } else {
             if (env.time > this.expire) return this.selectSurveyAction()
@@ -70,6 +93,10 @@ class CollectorBot extends ActionBot {
     }
 
     evoCapture(dt) {
+        const scanner = this.__.scanner
+        if (!scanner.pingDown(e => (e instanceof dna.zone.Scrap) && !e.tugPoint.isHooked() && !e._delivered)) {
+            this.cruise()
+        }
     }
 
     evoTug(dt) {

@@ -146,6 +146,16 @@ class Momentum {
         } else if (sV[0] < 0) {
             sV[0] = min(sV[0] + friction * dt, 0)
         }
+        // hovercraft
+        if (!__.gravityEffect) {
+            friction = env.tune.hoverResistance
+
+            if (sV[1] > 0) {
+                sV[1] = max(sV[1] - friction * dt, 0)
+            } else if (sV[1] < 0) {
+                sV[1] = min(sV[1] + friction * dt, 0)
+            }
+        }
 
         __._contact = false
         __.collider.collide((contactTarget, contactSolid, contactPoint) => {

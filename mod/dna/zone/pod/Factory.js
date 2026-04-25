@@ -35,7 +35,7 @@ class Factory {
 
     buildCollector() {
         const mech = this.build( env.blueprint.collector, 7 )
-        mech.y = 120
+        if (mech) mech.y = 120
     }
 
     buildBattleMech() {

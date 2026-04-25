@@ -77,11 +77,24 @@ class ActionBot extends Bot {
                 break
             case 'ascend':
                 attitude.ascend(dt)
-                if (this.__.y >= this.cruiseAlt) this.action = 'level'
+                if (__.y >= this.cruiseAlt) this.action = 'level'
                 break
             case 'level':
                 attitude.level(dt)
+                // TODO refactor it out - shouldn't be here
+                //      maybe assign an event to notify higher-levelbot?
                 if (__.momentum.speedV[1] === 0) this.doTug()
+                break
+            case 'cruise':
+                if (abs(__.y - this.cruiseAlt) < this.cruiseGap) {
+                    if (this.onCruiseAlt) this.onCruiseAlt()
+                } else {
+                    if (__.y < this.cruiseAlt) {
+                        attitude.ascend(dt)
+                    } else if (__.y >= this.cruiseAlt) {
+                        attitude.descent(dt)
+                    } 
+                }
                 break
 
             case 'wait':
