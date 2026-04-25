@@ -20,7 +20,6 @@ V mech
     V scanner
     V scrap metal collector
     > battle bot controller
-    > low-level mech reflexes pod
 V projectile
     V bullet hell layer
     V zombie frame pooling
@@ -59,4 +58,5 @@ V mech and base health bar
 > music player
 > transitions
 > in-game console
+> low-level mech reflexes pod
 

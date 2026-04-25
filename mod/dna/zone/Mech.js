@@ -14,7 +14,8 @@ class Mech extends TurnablePlatform {
             w:   20,
             h:   50,
 
-            timestamp: env.time + 27 * rnd(),
+            timestamp:  env.time + 27 * rnd(),
+            _combatant: true,
         }, st) )
 
         // === Blueprint Construction ===
@@ -146,6 +147,7 @@ class Mech extends TurnablePlatform {
             }) )
 
             _.attach( new dna.zone.pod.RandomWalkBot() )
+            //_.attach( new dna.zone.pod.BattleBot() )
         }
 
         function formHovercraft() {
@@ -249,7 +251,8 @@ class Mech extends TurnablePlatform {
                 joint: hookJoint
             }) )
 
-            _.attach( new dna.zone.pod.CollectorBot() )
+            _.attach( new dna.zone.pod.RandomHoverBot() )
+            //_.attach( new dna.zone.pod.CollectorBot() )
         }
 
         switch(blueprint.chasis) {

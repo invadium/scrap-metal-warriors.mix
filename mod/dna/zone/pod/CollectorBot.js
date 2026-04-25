@@ -1,49 +1,19 @@
-const ACTIONS = 4
+const Bot = require('dna/zone/pod/Bot')
 
 const IDLE    = 0
 const SURVEY  = 1
 const CAPTURE = 2
 const TUG     = 3
 
-class CollectorBot {
+class CollectorBot extends Bot {
 
     constructor(st) {
-        augment(this, {
-            type:  'bot',
-            alias: 'bot',
+        super( augment({
             name:  'collectorBot',
 
-            paused: false,
             state:  SURVEY,
-            action: 'idle',
-            expire: env.time + 3 * rnd(),
-
             cruiseAlt: env.tune.mech.cruiseAlt,
-        }, st)
-    }
-
-    enable() {
-        this.paused = false
-    }
-
-    disable() {
-        this.paused = true
-    }
-
-    idToAction(id) {
-        switch(id) {
-            case 0:  return 'idle';
-            case 1:  return 'moveLeft';
-            case 2:  return 'moveRight';
-            case 3:  return 'jump';
-            case 4:  return 'moveDown';
-            default: return 'unknown';
-        }
-    }
-
-    selectNextAction() {
-        this.action = this.idToAction( RND(0, ACTIONS) )
-        this.expire = env.time + 1 + 3 * rnd()
+        }, st) )
     }
 
     selectSurveyAction() {
@@ -96,7 +66,7 @@ class CollectorBot {
         if (base) this.drop()
     }
 
-    evo(dt) {
+    evoGoal(dt) {
         const __ = this.__
         const attitude = this.__.attitude
 
@@ -105,24 +75,6 @@ class CollectorBot {
             case SURVEY:  this.evoSurvey(dt);  break;
             case CAPTURE: this.evoCapture(dt); break;
             case TUG:     this.evoTug(dt);     break;
-        }
-
-        // do current action
-        switch(this.action) {
-            case 'idle':                            break;
-            case 'moveLeft':  attitude.left(dt);    break;
-            case 'moveRight': attitude.right(dt);   break;
-            case 'descent':
-                attitude.descent(dt)
-                break
-            case 'ascend':
-                attitude.ascend(dt)
-                if (this.__.y >= this.cruiseAlt) this.action = 'level'
-                break
-            case 'level':
-                attitude.level(dt)
-                if (this.__.momentum.speedV[1] === 0) this.doTug()
-                break
         }
     }
 

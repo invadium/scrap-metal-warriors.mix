@@ -2,7 +2,8 @@ class Scanner {
 
     constructor(st) {
         augment(this, {
-            name: 'scanner',
+            name:   'scanner',
+            range:  500,
         }, st)
     }
 
@@ -14,6 +15,56 @@ class Scanner {
     retreatDir() {
         if (this.__.team === 2) return 1
         else return -1
+    }
+
+    detectFrontalEnemy() {
+        const __   = this.__,
+              dir  = __.dir,
+              team = __.team,
+              ls   = lab.zone._ls
+
+        let closest, dist = 0xFFFFFFFF
+        for (let i = ls.length - 1; i >= 0; i--) {
+            const e = ls[i]
+            if (e._combatant && e.team !== team) {
+                // we got ourselves an enemy!
+                const dx = e.x - __.x
+                if ((dir < 0 && dx < 0) || (dir > 0 && dx > 0)) {
+                    // in front - calculate horizontal distance
+                    const hd = abs(dx)
+                    if (hd < dist) {
+                        closest = e
+                        dist = hd
+                    }
+                }
+            }
+        }
+        if (closest && dist <= this.range) return closest
+    }
+
+    detectEnemyBehind() {
+        const __   = this.__,
+              dir  = __.dir,
+              team = __.team,
+              ls   = lab.zone._ls
+
+        let closest, dist = 0xFFFFFFFF
+        for (let i = ls.length - 1; i >= 0; i--) {
+            const e = ls[i]
+            if (e._combatant && e.team !== team) {
+                // we got ourselves an enemy!
+                const dx = e.x - __.x
+                if ((dir < 0 && dx > 0) || (dir > 0 && dx < 0)) {
+                    // behind - calculate horizontal distance
+                    const hd = abs(dx)
+                    if (hd < dist) {
+                        closest = e
+                        dist = hd
+                    }
+                }
+            }
+        }
+        if (closest && dist <= this.range) return closest
     }
 
     sense(predicate) {

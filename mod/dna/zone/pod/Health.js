@@ -11,9 +11,12 @@ class Health {
     }
 
     damage(force) {
+        const __ = this.__
         this.hits = max(this.hits - force, 0)
         if (this.hits === 0) {
-            kill(this.__)
+            kill(__)
+        } else {
+            // TODO notify the bot about taking damage
         }
     }
 }

@@ -16,7 +16,8 @@ class Base extends TurnablePlatform {
                 metal: 0,
             },
 
-            timestamp: env.time + 17 * rnd(),
+            timestamp:  env.time + 17 * rnd(),
+            _combatant: true,
         }, st) )
         const base = this
 
