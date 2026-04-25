@@ -21,6 +21,10 @@ class Bot {
         this.paused = true
     }
 
+    isInControl() {
+        return !this.paused
+    }
+
     selectNextAction() {
         this.action = math.rnde([
             'idle',
@@ -31,11 +35,30 @@ class Bot {
         ])
     }
 
+    pickAction(ls) {
+        const N = ls.length
+        let totalWeight = 0
+        for (let i = N - 1; i >= 0; i -= 2) totalWeight += ls[i]
+
+        let t = 0
+        for(let i = 1; i < N; i += 2) {
+            t += ls[i] / totalWeight
+            ls[i] = t
+        }
+
+        const v = rnd()
+        for (let i = 1; i < N; i += 2) {
+            const wp = ls[i]
+            if (v < wp) return ls[i-1]
+        }
+        return 'unknown'
+    }
+
     evoAction(dt) {
         const __ = this.__
         const attitude = this.__.attitude
 
-        if (env.time > this.expire) {
+        if (this.expire > 0 && env.time > this.expire) {
             // preselect action time by default
             this.expire = env.time + 2 + 3 * rnd()
             this.selectNextAction()
@@ -64,6 +87,10 @@ class Bot {
             case 'fire':
                 if (__.gun) __.gun.fire(dt)
                 break
+            case 'jumpFire':
+                attitude.jump(dt)
+                if (__.gun) __.gun.fire(dt)
+                break
             case 'descent':
                 attitude.descent(dt)
                 break
@@ -89,22 +116,6 @@ class Bot {
     evo(dt) {
         this.evoGoal(dt)
         this.evoAction(dt)
-    }
-
-    idToAction(id) {
-        switch(id) {
-            case 0:  return 'idle';
-            case 1:  return 'moveLeft';
-            case 2:  return 'moveRight';
-            case 3:  return 'jumpLeft';
-            case 4:  return 'jumpRight';
-            case 5:  return 'jump';
-            case 6:  return 'fire';
-            case 7:  return 'ascent';
-            case 8:  return 'descent';
-            case 9:  return 'level';
-            default: return 'unknown';
-        }
     }
 
 }

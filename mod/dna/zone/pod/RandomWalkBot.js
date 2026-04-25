@@ -1,5 +1,3 @@
-const ACTIONS = 6
-
 const Bot = require('dna/zone/pod/Bot')
 
 class RandomWalkBot extends Bot {
@@ -11,6 +9,16 @@ class RandomWalkBot extends Bot {
     }
 
     selectNextAction() {
-        this.action = this.idToAction( RND(0, ACTIONS) )
+        this.action = math.rnde([
+            'idle',
+            'moveLeft',
+            'moveRight',
+            'jumpLeft',
+            'jumpRight',
+            'jump',
+            'fire',
+            'fire',
+            'jumpFire'
+        ])
     }
 }

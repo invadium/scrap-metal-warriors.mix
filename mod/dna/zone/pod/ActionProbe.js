@@ -15,10 +15,12 @@ class ActionProbe {
               bot = __.bot,
               lx  = this.x,
               ly  = this.y
+        if (!bot.isInControl()) return
 
         const title = (bot.goal? `${bot.goal} - ` : '')
                       + bot.action
                       + (bot.target? ` - ${bot.target}` : '')
+                      + (bot.expire > 0? `[${ceil(bot.expire - env.time)}]` : '')
         save()
         if (this.__.dir < 0) scale(-1, 1) // flip back
         translate(lx, ly)

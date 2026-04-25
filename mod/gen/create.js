@@ -86,7 +86,7 @@ function create() {
     */
 
     zone.spawn('Mech', {
-        team:  2,
+        team:  1,
         dir:  -1,
         x:     400,
 
@@ -94,6 +94,7 @@ function create() {
     })
 
 
+    /*
     zone.spawn('Mech', {
         team: 1,
         x:    1000,
@@ -112,6 +113,7 @@ function create() {
         x:     1400,
         y:    -70,
     })
+    */
 
     if (env.debug) this.debug(zone)
 }

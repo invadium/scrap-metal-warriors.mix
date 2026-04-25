@@ -24,7 +24,6 @@ class HealthBar {
         stroke('#40ff60')
         line(bx, y, bx + w * H, y)
 
-
         restore()
     }
 

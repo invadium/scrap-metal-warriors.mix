@@ -36,6 +36,7 @@ class CollectorBot extends Bot {
         this.goal  = 'tug'
         if (this.__.scanner.retreatDir() < 0) this.action = 'moveLeft'
         else this.action = 'moveRight'
+        this.expire = -1
     }
 
     drop() {
@@ -55,6 +56,7 @@ class CollectorBot extends Bot {
             this.state  = CAPTURE
             this.goal   = 'capture'
             this.action = 'descent'
+            this.expire = -1
             this.__.hook.enable()
         } else {
             if (env.time > this.expire) return this.selectSurveyAction()
@@ -95,6 +97,7 @@ class CollectorBot extends Bot {
 
     onScrapCapture() {
         this.action = 'ascend'
+        this.expire = -1
     }
 
 }
