@@ -12,6 +12,10 @@ class Base extends TurnablePlatform {
             w:   160,
             h:   120,
 
+            stock: {
+                metal: 0,
+            },
+
             timestamp: env.time + 17 * rnd(),
         }, st) )
         const base = this
@@ -54,12 +58,23 @@ class Base extends TurnablePlatform {
         }) )
     }
 
+    resupply(scrap) {
+        this.stock.metal ++
+        log(`${this.name} metal +1: ${this.stock.metal}`)
+        kill(scrap)
+    }
+
     hit(hitter, targetSolid, force) {
         this.health.damage(force)
+    }
+
+    capture(hitter) {
+        if (hitter instanceof dna.zone.Scrap) {
+            if ( distance(this.x, this.y, hitter.x, hitter.y) < 20 ) this.resupply(hitter)
+        }
     }
 
     draw() {
         super.draw()
     }
-
 }

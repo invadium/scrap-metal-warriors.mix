@@ -45,6 +45,7 @@ V limit mech max speed
 > vfx
 
 ### Proto II
+> select a new name!
 V mech and base health bar
 > radar
 > jump zone navigation

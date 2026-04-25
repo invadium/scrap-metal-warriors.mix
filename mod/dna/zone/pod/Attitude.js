@@ -29,16 +29,16 @@ class Attitude {
 
     descent(dt) {
         const mt = this.__.momentum
-        mt.push([0, -1], 20, dt)
+        mt.push([0, -1], env.tune.mech.descendForce, dt)
     }
 
     ascend(dt) {
         const mt = this.__.momentum
-        mt.push([0,  1], 15, dt)
+        mt.push([0,  1], env.tune.mech.ascendForce, dt)
     }
 
     level(dt) {
         const mt = this.__.momentum
-        mt.decelerateV(25, dt)
+        mt.decelerateV(env.tune.mech.levelForce, dt)
     }
 }

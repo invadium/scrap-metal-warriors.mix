@@ -149,9 +149,9 @@ class Momentum {
 
         __._contact = false
         __.collider.collide((contactTarget, contactSolid, contactPoint) => {
+            __._contact = true
             if (contactTarget.hit) {
                 // just mark the contact for now
-                __._contact = true
                 // TODO touch another bot? hit it?
                 // contactTarget.hit(hitter)
             }

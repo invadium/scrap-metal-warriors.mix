@@ -18,7 +18,7 @@ class CollectorBot {
             action: 'idle',
             expire: env.time + 3 * rnd(),
 
-            cruiseAlt: 100,
+            cruiseAlt: env.tune.mech.cruiseAlt,
         }, st)
     }
 
@@ -85,7 +85,14 @@ class CollectorBot {
 
     evoTug(dt) {
         const team = this.__.team
-        const base = this.__.scanner.sense(e => (e instanceof dna.zone.Base) && e.team === team)
+        const x    = this.__.x
+        const BW   = 5
+        const base = this.__.scanner.sense(
+            e => (e instanceof dna.zone.Base)
+                 && x >= e.x - BW
+                 && x <= e.x + BW
+                 && e.team === team
+        )
         if (base) this.drop()
     }
 

@@ -60,12 +60,11 @@ class Scrap extends TurnablePlatform {
     }
 
     capture(source) {
-        // log('captured by ' + source.name)
+        if (source instanceof dna.zone.Base) debugger
         if (source.hook && source.hook.isEnabled()) {
             source.hook.capture(this)
         }
     }
-
 }
 Scrap.reset = function() {
     id = 0
