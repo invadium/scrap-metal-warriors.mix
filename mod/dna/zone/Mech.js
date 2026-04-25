@@ -29,7 +29,8 @@ class Mech extends TurnablePlatform {
             new dna.zone.pod.Attitude(),
             new dna.zone.pod.Collider(),
 
-            // controllers
+            // navigation
+            new dna.zone.pod.Scanner(),
             new dna.zone.pod.Controller(),
         ])
 
@@ -230,7 +231,8 @@ class Mech extends TurnablePlatform {
                 h: 50,
             }) )
 
-            _.attach( new dna.zone.pod.RandomHoverBot() )
+            _.attach( new dna.zone.pod.Hook() )
+            _.attach( new dna.zone.pod.CollectorBot() )
         }
 
         switch(blueprint.chasis) {

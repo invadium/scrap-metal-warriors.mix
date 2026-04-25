@@ -8,16 +8,19 @@ V debug info
 V status bar
 > title bar
 > construction UI pop-up
+> pop-up lists
 
 
 ### Probe I
 V platform
 V mech
     V gun
-    > scanner
-    > bot controller
-    > hovercraft chasis
-    > scrap metal collector
+    V hovercraft chasis
+    V collector bot controller
+    V scanner
+    V scrap metal collector
+    > battle bot controller
+    > low-level mech reflexes pod
 V projectile
     V bullet hell layer
     V zombie frame pooling
@@ -32,19 +35,25 @@ V scrap metal
 V scrap orbital rain
 V teams
 V damage
-> build a bot button
 V limit mech max speed
+> build a bot button
 
 
 ### System II
-> main menu
 > parallax background
-> music player
 > sfx
 > vfx
-> transitions
-> in-game console
 
 ### Proto II
-> mech and base health bar
+V mech and base health bar
+> radar
+> jump zone navigation
+> mech build UI
+
+
+### System III
+> main menu
+> music player
+> transitions
+> in-game console
 

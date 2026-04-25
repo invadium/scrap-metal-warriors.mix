@@ -3,6 +3,7 @@ const PER_SECOND_FACTOR = 1/60
 function evo(dt) {
     if (rnd() > env.tune.scrap.FQ * PER_SECOND_FACTOR * dt) return
 
+    /*
     // DEBUG
     lab.zone.spawn('Mech', {
         team: 1,
@@ -15,6 +16,7 @@ function evo(dt) {
         x:    2350,
         y:    200,
     })
+    */
 
     if (job.control.mission.scrapQty() >= env.tune.scrap.limit) return
 

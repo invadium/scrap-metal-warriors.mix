@@ -55,11 +55,12 @@ function create() {
     // === mechs ===
     zone.spawn('Mech', {
         team: 1,
-        x:    220,
+        x:    20,
         y:    200,
         blueprint: env.blueprint.collector,
     })
 
+    /*
     zone.spawn('Mech', {
         team: 1,
         x:    250,
@@ -71,6 +72,7 @@ function create() {
         x:    300,
         y:    120,
     })
+    */
 
     zone.spawn('Mech', {
         team:  2,

@@ -10,6 +10,14 @@ class Momentum {
         }, st)
     }
 
+    enable() {
+        this.paused = false
+    }
+
+    disable() {
+        this.paused = true
+    }
+
     isTouchingGround() {
         const __ = this.__
         return (__.y - .5 * __.h <= 0)
@@ -23,6 +31,19 @@ class Momentum {
     apply(dx, dy) {
         this.speedV[0] += dx
         this.speedV[0] += dy
+    }
+
+    decelerateV(rate, dt) {
+        const __ = this.__
+        const sV = this.speedV
+
+        if (sV[1] < 0) {
+            sV[1] += rate * dt
+            if (sV[1] > 0) sV[1] = 0
+        } else if (sV[1] > 0) {
+            sV[1] -= rate * dt
+            if (sV[1] < 0) sV[1] = 0
+        }
     }
 
     accelerate(dir, dt) {
@@ -133,6 +154,9 @@ class Momentum {
                 __._contact = true
                 // TODO touch another bot? hit it?
                 // contactTarget.hit(hitter)
+            }
+            if (contactTarget.capture) {
+                contactTarget.capture(__)
             }
         })
     }

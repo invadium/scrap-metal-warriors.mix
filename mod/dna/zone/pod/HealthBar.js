@@ -24,6 +24,15 @@ class HealthBar {
         stroke('#40ff60')
         line(bx, y, bx + w * H, y)
 
+
+        translate(x, y + 5)
+        scale(1, -1)
+        fill('#ffff00')
+        baseBottom()
+        alignCenter()
+        font('16px pixel-operator')
+        text('' + this.__.bot.action, 0, 0)
+
         restore()
     }
 

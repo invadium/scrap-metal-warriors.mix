@@ -26,4 +26,19 @@ class Attitude {
         const mt = this.__.momentum
         mt.jump(this.jumpForce)
     }
+
+    descent(dt) {
+        const mt = this.__.momentum
+        mt.push([0, -1], 20, dt)
+    }
+
+    ascend(dt) {
+        const mt = this.__.momentum
+        mt.push([0,  1], 15, dt)
+    }
+
+    level(dt) {
+        const mt = this.__.momentum
+        mt.decelerateV(25, dt)
+    }
 }

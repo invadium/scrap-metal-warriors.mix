@@ -51,8 +51,9 @@ class Controller {
         const sx = pin.cam.ux(__.x),
               sy = pin.cam.uy(__.y)
 
+
         const edge = ctx.width * this.followThreshold
-        if (sx < edge || sx > ctx.width - edge) {
+        if ((sx < edge || sx > ctx.width - edge) && !mouse.buttons) {
             const sV = this.__.momentum.speedV
             const shift = .5 * (pin.cam.view.getWidth() - 2*edge)
 

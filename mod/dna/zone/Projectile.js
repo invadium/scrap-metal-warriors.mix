@@ -15,6 +15,7 @@ class Projectile extends Platform {
     constructor(st) {
         super( augment({
             id:  ++id,
+            name: 'projectile' + id,
             x:     0,
             y:     0,
             r:     2.5,

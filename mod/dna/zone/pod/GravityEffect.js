@@ -7,6 +7,14 @@ class GravityEffect {
         }, st)
     }
 
+    enable() {
+        this.paused = false
+    }
+
+    disable() {
+        this.paused = true
+    }
+
     evo(dt) {
         const __ = this.__
         if (__.momentum.isTouchingGround()) return

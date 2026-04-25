@@ -24,6 +24,7 @@ class Scrap extends TurnablePlatform {
                 jumpy: true,
             }),
             new dna.zone.pod.GravityEffect(),
+            new dna.zone.pod.TugPoint(),
 
             new dna.zone.pod.Collider(),
             new dna.zone.pod.SolidCircle({
@@ -52,6 +53,17 @@ class Scrap extends TurnablePlatform {
             color: '#405060',
         }) )
 
+    }
+
+    hit(hitter) {
+        // log('hit by ' + hitter.name)
+    }
+
+    capture(source) {
+        // log('captured by ' + source.name)
+        if (source.hook && source.hook.isEnabled()) {
+            source.hook.capture(this)
+        }
     }
 
 }
