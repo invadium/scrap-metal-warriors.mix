@@ -1,11 +1,15 @@
 function create() {
+    log('starting creation')
 
+    log('wait for clean up...')
     this.clean()
 
+    log('creating new zone...')
     const zone = lab.touch('zone', {
         Z:      21,
         hidden: true,
         width:  env.tune.zone.width,
+        winner: 0,
     })
     const ports = lab.touch('ports', {
         Z: 27,

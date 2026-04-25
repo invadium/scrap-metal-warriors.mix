@@ -1,8 +1,9 @@
 function evo(dt) {
 
-    const c1 = lab.ports.cam1,
+    const c1 = pin.cam,
           v1 = c1.view,
           flip = v1.flipY? '!' : ''
+    if (!c1) return
     pin.info.set('cam', `[${round(v1.x)}:${round(v1.y)} ** ${round(v1.zoom*100)/100}]`)
 
     const tpod = c1.targetingPod

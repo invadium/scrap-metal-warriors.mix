@@ -22,7 +22,7 @@ class ActionProbe {
                       + (bot.target? ` - ${bot.target}` : '')
                       + (bot.expire > 0? `[${ceil(bot.expire - env.time)}]` : '')
         save()
-        if (this.__.dir < 0) scale(-1, 1) // flip back
+        if (__.dir < 0) scale(-1, 1) // flip back
         translate(lx, ly)
         scale(1, -1) // flip vertically for text
             fill('#ffff00')
@@ -30,6 +30,8 @@ class ActionProbe {
             alignCenter()
             font('14px pixel-operator')
             text(title, 0, 0)
+
+            text(`== ${__.name} ==`, 0, -12)
         restore()
     }
 

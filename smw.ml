@@ -36,6 +36,7 @@ V teams
 V damage
 V limit mech max speed
 > build a bot button
+> ! mouse slide doesn't work when focus-sliding back on target
 
 
 ### System II
