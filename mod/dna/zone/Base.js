@@ -12,10 +12,6 @@ class Base extends TurnablePlatform {
             w:   160,
             h:   120,
 
-            stock: {
-                metal: 0,
-            },
-
             timestamp:  env.time + 17 * rnd(),
             _combatant: true,
         }, st) )
@@ -62,12 +58,17 @@ class Base extends TurnablePlatform {
             x: 0,
             y: .58 * this.h,
         }) )
-    }
 
-    resupply(scrap) {
-        this.stock.metal ++
-        log(`${this.name} metal +1: ${this.stock.metal}`)
-        kill(scrap)
+        this.attach( new dna.zone.pod.Stock() )
+        this.attach( new dna.zone.pod.Factory() )
+
+        this.attach( new dna.zone.pod.BaseBot() )
+        if (env.showActions) {
+            this.attach( new dna.zone.pod.ActionProbe({
+                x: 0,
+                y: 74,
+            }) )
+        }
     }
 
     hit(hitter, targetSolid, force) {
@@ -76,7 +77,7 @@ class Base extends TurnablePlatform {
 
     capture(hitter) {
         if (hitter instanceof dna.zone.Scrap) {
-            if ( distance(this.x, this.y, hitter.x, hitter.y) < 20 ) this.resupply(hitter)
+            if ( distance(this.x, this.y, hitter.x, hitter.y) < 20 ) this.stock.resupply(hitter)
         }
     }
 

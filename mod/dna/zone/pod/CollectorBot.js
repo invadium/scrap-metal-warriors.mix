@@ -62,7 +62,7 @@ class CollectorBot extends ActionBot {
 
     evoSurvey(dt) {
         const scanner = this.__.scanner
-        if (scanner.sense(e => (e instanceof dna.zone.Scrap) && !e._delivered)) {
+        if (scanner.pingDown(e => (e instanceof dna.zone.Scrap) && !e._delivered)) {
             this.capture()
         } else {
             if (env.time > this.expire) return this.selectSurveyAction()
@@ -76,7 +76,7 @@ class CollectorBot extends ActionBot {
         const team = this.__.team
         const x    = this.__.x
         const BW   = 5
-        const base = this.__.scanner.sense(
+        const base = this.__.scanner.pingDown(
             e => (e instanceof dna.zone.Base)
                  && x >= e.x - BW
                  && x <= e.x + BW

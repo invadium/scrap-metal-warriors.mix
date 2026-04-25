@@ -14,8 +14,10 @@ class Mech extends TurnablePlatform {
             w:   20,
             h:   50,
 
+            mass:       1,
             timestamp:  env.time + 27 * rnd(),
             _combatant: true,
+            _collector: false,
         }, st) )
 
         // === Blueprint Construction ===

@@ -19,10 +19,11 @@ class Scanner {
         else return -1
     }
 
-    lookAhead(predicate) {
+    lookAhead(predicate, range) {
         const __   = this.__,
               dir  = __.dir,
               ls   = lab.zone._ls
+        range = range || this.range
 
         let closest, dist = 0xFFFFFFFF
         for (let i = ls.length - 1; i >= 0; i--) {
@@ -39,7 +40,7 @@ class Scanner {
                 }
             }
         }
-        if (closest && dist <= this.range) {
+        if (closest && dist <= range) {
             this._lastRange = dist
             return closest
         }
@@ -86,7 +87,7 @@ class Scanner {
         return this.lookBehind(e => e._combatant && e.team !== team, this.range)
     }
 
-    sense(predicate) {
+    pingDown(predicate) {
         const bx = this.__.x
         const ls = lab.zone._ls
         for (let i = ls.length - 1; i >= 0; i--) {

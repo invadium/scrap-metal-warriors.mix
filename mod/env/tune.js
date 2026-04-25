@@ -20,6 +20,12 @@ const tune = {
 
     base: {
         shift: 120, 
+        minCollectors: 2,
+        collectorToWarriorRate: .2,
+    },
+
+    startStock: {
+        metal: 11,
     },
 
     scrap: {

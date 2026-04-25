@@ -14,6 +14,12 @@ function scrapQty() {
     return qty(e => e instanceof dna.zone.Scrap)
 }
 
-function mechQty() {
-    return qty(e => e instanceof dna.zone.Mech)
+function mechQty(predicate) {
+    let fn
+    if (predicate) {
+        fn = (e => (e instanceof dna.zone.Mech) && predicate(e))
+    } else {
+        fn = (e => e instanceof dna.zone.Mech)
+    }
+    return qty(fn)
 }

@@ -7,6 +7,10 @@ class Hook {
         this.disable()
     }
 
+    init() {
+        this.__._collector = true
+    }
+
     enable() {
         this.paused = false
     }
