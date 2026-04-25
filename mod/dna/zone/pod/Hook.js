@@ -24,7 +24,7 @@ class Hook {
         if (target._delivered) return
 
         this.target = target
-        target.tugPoint.setHook(this.__)
+        target.tugPoint.setHook(this.joint)
         target.tugPoint.enable()
         this.__.bot.onScrapCapture()
         this.disable()

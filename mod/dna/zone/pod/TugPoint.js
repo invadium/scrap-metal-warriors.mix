@@ -3,10 +3,10 @@ class TugPoint {
     constructor(st) {
         augment(this, {
             name: 'tugPoint',
-            hook: null,
-            
+
             x:    0,
             y:    0,
+            hookJoint: null,
         }, st)
     }
 
@@ -23,21 +23,22 @@ class TugPoint {
     }
 
     release() {
-        this.hook = null
+        this.hookJoint = null
         this.disable()
     }
 
     evo(dt) {
-        const hook = this.hook
-        if (!hook) return
+        const hookJoint = this.hookJoint
+        if (!hookJoint) return
         const __ = this.__
 
-        __.x = hook.x + this.x
-        __.y = hook.y + this.y
+        __.x = hookJoint.wx(0) + this.x
+        __.y = hookJoint.wy(0) + this.y
+        if (__.y < .5 * this.__.h) __.y = .5 * this.__.h
     }
 
-    setHook(hook) {
-        this.hook = hook
+    setHook(hookJoint) {
+        this.hookJoint = hookJoint
     }
 
 }

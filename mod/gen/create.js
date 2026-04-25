@@ -46,20 +46,31 @@ function create() {
         y:    60,
     })
 
-    // === scrap ===
-    zone.spawn('Scrap', {
-        x:    250,
-        y:    400,
-    })
-
-    // === mechs ===
+    // === scrap collectors ===
     zone.spawn('Mech', {
         team: 1,
-        x:    20,
-        y:    200,
+        x:    220,
+        y:    170,
+        blueprint: env.blueprint.collector,
+    })
+    zone.spawn('Mech', {
+        team: 2,
+        x:    zone.width - 220,
+        y:    170,
         blueprint: env.blueprint.collector,
     })
 
+    zone.spawn('Scrap', {
+        x:    350,
+        y:    400,
+    })
+    zone.spawn('Scrap', {
+        x:    zone.width - 350,
+        y:    400,
+    })
+
+
+    // === battle mechs ===
     /*
     zone.spawn('Mech', {
         team: 1,

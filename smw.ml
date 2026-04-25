@@ -46,6 +46,8 @@ V limit mech max speed
 
 ### Proto II
 > select a new name!
+     > scrap battlegrounds?
+     > scrap battlezone
 V mech and base health bar
 > radar
 > jump zone navigation

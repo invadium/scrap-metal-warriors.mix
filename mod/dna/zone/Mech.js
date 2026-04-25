@@ -231,7 +231,24 @@ class Mech extends TurnablePlatform {
                 h: 50,
             }) )
 
-            _.attach( new dna.zone.pod.Hook() )
+            const hookJoint = headJoint.attach( new dna.zone.pod.Joint({
+                mount: {
+                    x: 0,
+                    y: -45,
+                }
+            }) )
+            hookJoint.attachKey({
+                evo: function(dt) {
+                    const joint = this.__
+                    const mech = joint.skeleton.__
+                    joint.x = joint.mount.x + 7 * sin((env.time - mech.timestamp) * 2.1)
+                    joint.x = joint.mount.x + 4 * sin((env.time - mech.timestamp) * 2.7)
+                }
+            })
+            _.attach( new dna.zone.pod.Hook({
+                joint: hookJoint
+            }) )
+
             _.attach( new dna.zone.pod.CollectorBot() )
         }
 

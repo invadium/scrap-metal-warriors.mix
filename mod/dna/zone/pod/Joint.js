@@ -69,6 +69,15 @@ class Joint {
         return this.__.sy(ly + this.y)
     }
 
+    wx(lx) {
+        const mech = this.skeleton.__
+        return mech.x + (mech.dir < 0? -this.sx(lx) : this.sx(lx))
+    }
+
+    wy(ly) {
+        return this.skeleton.__.y + this.sy(ly)
+    }
+
     fx(lx) {
         return this.__.fx(lx + this.x)
     }
