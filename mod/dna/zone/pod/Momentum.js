@@ -117,7 +117,7 @@ class Momentum {
         // ground collision
         if (this.isTouchingGround()) {
             this.land()
-            if (this.jumpy) {
+            if (this.jumpy || sV[1] < -env.tune.reboundSpeed) {
                 sV[1] = -.5 * sV[1]
             } else {
                 sV[1] = 0

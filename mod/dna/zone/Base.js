@@ -57,6 +57,11 @@ class Base extends TurnablePlatform {
         this.attach( new dna.zone.pod.Health({
             hits: 400,
         }) )
+        this.attach( new dna.zone.pod.HealthBar({
+            w: this.w,
+            x: 0,
+            y: .58 * this.h,
+        }) )
     }
 
     resupply(scrap) {
@@ -77,5 +82,9 @@ class Base extends TurnablePlatform {
 
     draw() {
         super.draw()
+    }
+
+    onKill() {
+        trap('gameOver', this.team)
     }
 }

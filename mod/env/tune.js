@@ -2,6 +2,7 @@ const tune = {
     gravity:       160,
     friction:      160,
     airResistance: 60,
+    reboundSpeed:  120,
 
     groundLevel:            .25,
     guaranteedVerticalSpan:  200, // TODO calc the proper zoom to target
