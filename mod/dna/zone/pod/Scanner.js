@@ -4,6 +4,8 @@ class Scanner {
         augment(this, {
             name:   'scanner',
             range:  500,
+
+            _lastRange: -1,
         }, st)
     }
 
@@ -39,7 +41,10 @@ class Scanner {
                 }
             }
         }
-        if (closest && dist <= this.range) return closest
+        if (closest && dist <= this.range) {
+            this._lastRange = dist
+            return closest
+        }
     }
 
     detectEnemyBehind() {
@@ -64,7 +69,10 @@ class Scanner {
                 }
             }
         }
-        if (closest && dist <= this.range) return closest
+        if (closest && dist <= this.range) {
+            this._lastRange = dist
+            return closest
+        }
     }
 
     sense(predicate) {

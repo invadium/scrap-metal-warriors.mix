@@ -146,8 +146,14 @@ class Mech extends TurnablePlatform {
                 h: 64,
             }) )
 
-            _.attach( new dna.zone.pod.RandomWalkBot() )
-            //_.attach( new dna.zone.pod.BattleBot() )
+            _.attach( new dna.zone.pod.BattleBot() )
+            //_.attach( new dna.zone.pod.RandomWalkBot() )
+            if (env.showActions) {
+                _.attach( new dna.zone.pod.ActionProbe({
+                    x: 0,
+                    y: 42,
+                }) )
+            }
         }
 
         function formHovercraft() {
@@ -251,8 +257,14 @@ class Mech extends TurnablePlatform {
                 joint: hookJoint
             }) )
 
-            _.attach( new dna.zone.pod.RandomHoverBot() )
-            //_.attach( new dna.zone.pod.CollectorBot() )
+            _.attach( new dna.zone.pod.CollectorBot() )
+            //_.attach( new dna.zone.pod.RandomHoverBot() )
+            if (env.showActions) {
+                _.attach( new dna.zone.pod.ActionProbe({
+                    x: 0,
+                    y: 44,
+                }) )
+            }
         }
 
         switch(blueprint.chasis) {

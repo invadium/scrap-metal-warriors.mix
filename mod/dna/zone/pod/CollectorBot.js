@@ -10,10 +10,14 @@ class CollectorBot extends Bot {
     constructor(st) {
         super( augment({
             name:  'collectorBot',
-
-            state:  SURVEY,
             cruiseAlt: env.tune.mech.cruiseAlt,
         }, st) )
+        this.survey()
+    }
+
+    selectNextAction() {
+        this.action = 'wait'
+        this.goal   = 'unclear'
     }
 
     selectSurveyAction() {
@@ -29,13 +33,19 @@ class CollectorBot extends Bot {
 
     doTug() {
         this.state = TUG
+        this.goal  = 'tug'
         if (this.__.scanner.retreatDir() < 0) this.action = 'moveLeft'
         else this.action = 'moveRight'
     }
 
     drop() {
         this.__.hook.release()
-        this.state = SURVEY
+        this.survey()
+    }
+
+    survey() {
+        this.state  = SURVEY
+        this.goal   = 'survey'
         this.action = 'idle'
     }
 
@@ -43,6 +53,7 @@ class CollectorBot extends Bot {
         const scanner = this.__.scanner
         if (scanner.sense(e => (e instanceof dna.zone.Scrap) && !e._delivered)) {
             this.state  = CAPTURE
+            this.goal   = 'capture'
             this.action = 'descent'
             this.__.hook.enable()
         } else {

@@ -9,9 +9,17 @@ class BattleBot extends Bot {
     }
 
     selectNextAction() {
-        // TODO
-        this.action = this.idToAction( RND(0, ACTIONS) )
-        this.expire = env.time + 1 + 5 * rnd()
+        this.action = math.rnde([
+            'idle',
+            'moveLeft',
+            'moveRight',
+            'jumpLeft',
+            'jumpRight',
+            'jump',
+            'fire',
+            'fire',
+            'fire'
+        ])
     }
 
     evoGoal(dt) {

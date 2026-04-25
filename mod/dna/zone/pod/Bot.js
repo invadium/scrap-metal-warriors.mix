@@ -7,6 +7,7 @@ class Bot {
             name:  'bot',
 
             action: 'idle',
+            goal:   null,
             paused: false,
             expire: env.time + 1 + 4*rnd(),
         }, st)
@@ -73,6 +74,9 @@ class Bot {
             case 'level':
                 attitude.level(dt)
                 if (__.momentum.speedV[1] === 0) this.doTug()
+                break
+
+            case 'wait':
                 break
 
             default:

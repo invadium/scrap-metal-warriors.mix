@@ -13,7 +13,7 @@ Use the following flags to highlight a system of interest:
 --showBones
 --showSolids
 --showMomentum
---showAction
+--showActions
 ```
 
 You can set them directly on ```env``:
