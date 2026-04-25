@@ -25,13 +25,21 @@ class ActionProbe {
         if (__.dir < 0) scale(-1, 1) // flip back
         translate(lx, ly)
         scale(1, -1) // flip vertically for text
+
             fill('#ffff00')
             baseBottom()
             alignCenter()
             font('14px pixel-operator')
-            text(title, 0, 0)
 
-            text(`== ${__.name} ==`, 0, -12)
+            const dy = -12
+            let by = 0
+            if (bot.reason) {
+                text(bot.reason, 0, by)
+                by += dy
+            }
+            text(title, 0, by)
+            by += dy
+            text(`== ${__.name} ==`, 0, by)
         restore()
     }
 

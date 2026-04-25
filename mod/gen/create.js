@@ -11,6 +11,8 @@ function create() {
         width:  env.tune.zone.width,
         winner: 0,
     })
+    $.zone = zone
+
     const ports = lab.touch('ports', {
         Z: 27,
     })

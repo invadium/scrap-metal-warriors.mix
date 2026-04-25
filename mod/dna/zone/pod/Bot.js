@@ -54,6 +54,22 @@ class Bot {
         return 'unknown'
     }
 
+    leftBias(on, off) {
+        const targetDir = this.__.scanner.advanceDir()
+        return (targetDir < 0? on : off)
+    }
+
+    rightBias(on, off) {
+        const targetDir = this.__.scanner.advanceDir()
+        return (targetDir > 0? on : off)
+    }
+
+    friendlyBias(on, off) {
+        const team = this.__.team
+        const target = this.__.scanner.detectFrontalTech()
+        return (target.team === team? on : off)
+    }
+
     evoAction(dt) {
         const __ = this.__
         const attitude = this.__.attitude

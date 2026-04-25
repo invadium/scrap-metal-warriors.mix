@@ -19,20 +19,18 @@ class Scanner {
         else return -1
     }
 
-    detectFrontalEnemy() {
+    lookAhead(predicate) {
         const __   = this.__,
               dir  = __.dir,
-              team = __.team,
               ls   = lab.zone._ls
 
         let closest, dist = 0xFFFFFFFF
         for (let i = ls.length - 1; i >= 0; i--) {
             const e = ls[i]
-            if (e._combatant && e.team !== team) {
-                // we got ourselves an enemy!
+            if (predicate(e)) {
                 const dx = e.x - __.x
                 if ((dir < 0 && dx < 0) || (dir > 0 && dx > 0)) {
-                    // in front - calculate horizontal distance
+                    // target in front - calculate horizontal distance
                     const hd = abs(dx)
                     if (hd < dist) {
                         closest = e
@@ -47,20 +45,19 @@ class Scanner {
         }
     }
 
-    detectEnemyBehind() {
+    lookBehind(predicate, range) {
         const __   = this.__,
               dir  = __.dir,
-              team = __.team,
               ls   = lab.zone._ls
+        range = range || this.range
 
         let closest, dist = 0xFFFFFFFF
         for (let i = ls.length - 1; i >= 0; i--) {
             const e = ls[i]
-            if (e._combatant && e.team !== team) {
-                // we got ourselves an enemy!
+            if (predicate(e)) {
                 const dx = e.x - __.x
                 if ((dir < 0 && dx > 0) || (dir > 0 && dx < 0)) {
-                    // behind - calculate horizontal distance
+                    // target behind - calculate horizontal distance
                     const hd = abs(dx)
                     if (hd < dist) {
                         closest = e
@@ -69,10 +66,24 @@ class Scanner {
                 }
             }
         }
-        if (closest && dist <= this.range) {
+        if (closest && dist <= range) {
             this._lastRange = dist
             return closest
         }
+    }
+
+    detectFrontalEnemy() {
+        const team = this.__.team
+        return this.lookAhead(e => e._combatant && e.team !== team, this.range)
+    }
+
+    detectFrontalTech() {
+        return this.lookAhead(e => e._combatant, this.range)
+    }
+
+    detectEnemyBehind() {
+        const team = this.__.team
+        return this.lookBehind(e => e._combatant && e.team !== team, this.range)
     }
 
     sense(predicate) {
