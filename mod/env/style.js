@@ -81,11 +81,14 @@ const style = {
             size: 12,
         },
 
-
         debug: {
             family: 'pixel-operator',
             size: 24,
         },
+    },
+
+    hud: {
+        targetWidth: 1000,
     },
 }
 

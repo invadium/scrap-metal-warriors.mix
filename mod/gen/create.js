@@ -41,13 +41,16 @@ function create() {
     defer(() => cam1.targetingPod.rollTo(200, 'setup'), 1)
 
     // === bases ===
-    zone.spawn('Base', {
-        team: 1,
+    const base1 = zone.spawn('Base', {
+        team:   1,
+        player: 1,
         x:    env.tune.base.shift,
         y:    60,
     })
-    zone.spawn('Base', {
-        team: 2,
+    base1.bot.disable()
+    const base2 = zone.spawn('Base', {
+        team:   2,
+        player: 0,
         x:    zone.width - env.tune.base.shift,
         y:    60,
     })

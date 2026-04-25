@@ -17,7 +17,7 @@ V mech
     V scanner
     V scrap metal collector
     V battle bot controller
-    > base bot controller
+    V base bot controller
 V projectile
     V bullet hell layer
     V zombie frame pooling
@@ -38,7 +38,7 @@ V limit mech max speed
 
 ### System II
 > title bar
-> hud layer
+V hud layer
 > pop-up lists
 > build button
 > navigation buttons

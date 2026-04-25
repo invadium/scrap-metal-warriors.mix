@@ -23,3 +23,11 @@ function mechQty(predicate) {
     }
     return qty(fn)
 }
+
+function playerBase(player) {
+    const ls = lab.zone._ls
+    for (let i = ls.length - 1; i >= 0; i--) {
+        const e = ls[i]
+        if ((e instanceof dna.zone.Base) && e.player === player) return e
+    }
+}

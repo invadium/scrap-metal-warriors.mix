@@ -35,8 +35,10 @@ class Hook {
     }
 
     release() {
-        this.target._delivered = true
-        this.target.tugPoint.release()
+        if (this.target) {
+            this.target._delivered = true
+            this.target.tugPoint.release()
+        }
         this.disable()
     }
 
