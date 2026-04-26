@@ -1,20 +1,18 @@
 /*
  * Information node.
  */
-
-const df = {
-    name:       'info',
-    color:      '#ffffff',
-    background: '#00000080',
-    margin:     8,
-    rx:         0,
-    ry:         0,
-}
-
 class Info {
 
     constructor(st) {
-        extend(this, df, st)
+        extend(this, {
+            name:       'info',
+            color:      '#ffffff',
+            background: '#00000080',
+            margin:     8,
+            rx:         0,
+            ry:         0,
+        }, dna.trait.activatable, st)
+
         this.keys = {}
         this.icons = {}
     }

@@ -1,3 +1,18 @@
+function init() {
+    $.mission = this
+    pin.link(this)
+}
+
+function start() {
+    this.status = env.missionStatus = {
+        timer:      0,
+        day:        1,
+        timeFactor: 1 / env.tune.evoSpeed,
+        balance:    1000,
+        over:       false,
+    }
+}
+
 function qty(predicate) {
     const ls = lab.zone._ls
 
@@ -30,4 +45,33 @@ function playerBase(player) {
         const e = ls[i]
         if ((e instanceof dna.zone.Base) && e.player === player) return e
     }
+}
+
+function evo(dt) {
+    const ms = env.missionStatus
+    if (ms.over) return
+
+    ms.timer += dt * ms.timeFactor
+
+    if (ms.timer + 1 - ms.day > 1) {
+        ms.day ++
+        signal('nextDay', ms.day)
+    }
+}
+
+function getDay() {
+    return (this.status.timer | 0) + 1
+}
+
+function getHour() {
+    return floor((this.status.timer % 1) * env.tune.dayHours)
+}
+
+function getHourString() {
+    const hour = this.getHour()
+    return (hour < 10)? '0' + hour : '' + hour
+}
+
+function getTimeString() {
+    return lib.time.toString(this.status.timer)
 }

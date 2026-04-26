@@ -9,6 +9,7 @@ and sending them to the battle.
 Use the following flags to highlight a system of interest:
 
 ```
+--showInfo - open info panel on start (you can toggle any time with Ctrl+I)
 --showJoints
 --showBones
 --showSolids

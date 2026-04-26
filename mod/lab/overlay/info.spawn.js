@@ -6,6 +6,7 @@ const info = {
 
     init: function() {
         pin.info = this
+        this.deactivate()
     }
 }
 

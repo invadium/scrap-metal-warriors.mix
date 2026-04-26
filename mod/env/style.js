@@ -2,10 +2,15 @@ const style = {
 
     color: {
         main:  '#6b1fb1',
-        title: '#6b1fb1',
+
+        // title: '#f5daa7',
+        title: '#202020',
+        outline: '#ffffff',
+        border:  '#8dd894',
 
         sky: '#1f123a',
         grid: '#9e0abf',
+
 
         menu: {
             title: '#6b1fb1',
@@ -39,10 +44,11 @@ const style = {
             family: 'moon',
             size:   24,
         },
-        titleBar: {
-            family: 'moon',
-            size:   32,
+        title: {
+            family: 'pixel-operator',
+            size:   36,
         },
+
         messageBar: {
             family: 'moon',
             size:   48,
@@ -50,10 +56,6 @@ const style = {
         subMessageBar: {
             family: 'moon',
             size:   38,
-        },
-        title: {
-            family: 'moon',
-            size:   64,
         },
         menu: {
             family: 'moon',
