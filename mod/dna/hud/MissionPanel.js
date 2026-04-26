@@ -73,6 +73,17 @@ class MissionPanel extends $.dna.hud.Container {
         return upos
     }
 
+    show() {
+        super.show()
+        trap('state/factory')
+    }
+
+    hide() {
+        super.hide()
+        this.__.factoryButton.enable()
+        trap('state/battlezone')
+    }
+
     toggle() {
         if (this.hidden) this.show()
         else this.hide()
@@ -119,5 +130,10 @@ class MissionPanel extends $.dna.hud.Container {
 
     onMouseDown(x, y, b, e) {
         super.onMouseDown(x, y, b, e)
+    }
+
+    onClick(x, y, b, e) {
+        const handled = super.onClick(x, y, b, e)
+        if (!handled) this.hide()
     }
 }

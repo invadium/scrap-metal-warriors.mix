@@ -31,8 +31,8 @@ function hud() {
         transparent: false,
     })
 
-    hud.spawn( dna.hud.gadget.Button, {
-        name: 'factory',
+    const factoryButton = hud.spawn( dna.hud.gadget.Button, {
+        name: 'factoryButton',
         text: 'Construct',
         w: 200,
         h: 40,
@@ -40,15 +40,24 @@ function hud() {
         adjust: function() {
             if (!this.__) return
             const { w, h } = this.__
-            this.x = .15 * w
+            this.x = 20
             this.y = h - this.h - 80
         },
 
+        enable: function() {
+            this.disabled = false
+        },
+
+        disable: function() {
+            this.disabled = true
+        },
+
         onClick: function() {
-            mp.toggle()
+            mp.show()
+            this.disable()
         },
     } )
-
+    cp.factoryButton = factoryButton
     mp.hide()
     hud.adjust()
 }

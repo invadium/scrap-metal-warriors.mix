@@ -1,5 +1,7 @@
 function evo(dt) {
     if (mouse.out || !(mouse.buttons & 1)) return
+    if (mouse.y > ctx.height - env.tune.groundLevel * ctx.height) return
+    if (env.state !== 'battlezone') return
     const slideAreaWidth = env.tune.mouseSlideArea * ctx.width
 
     if (mouse.x < slideAreaWidth) {

@@ -32,6 +32,10 @@ class ElasticTargetingPod {
         this.target = rt
     }
 
+    focusOn(target) {
+        this.rollTo(target.x)
+    }
+
     slideLeft(dt) {
         const rt = this.rollTarget
         this.rollTo(rt.x - (this.slideSpeed / this.__.view.zoom) * dt, 'slideLeft')
