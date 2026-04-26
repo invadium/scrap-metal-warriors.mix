@@ -1,4 +1,8 @@
 const tune = {
+
+    evoSpeed: 5,            // seconds per day
+    dayHours: 24,
+
     gravity:         160,
     friction:        160,
     airResistance:   60,

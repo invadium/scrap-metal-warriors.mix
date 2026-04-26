@@ -48,8 +48,8 @@ class CollectorBot extends ActionBot {
         this.expire = -1
     }
 
-    drop() {
-        this.__.hook.release()
+    drop(delivered) {
+        this.__.hook.release(delivered)
         this.survey()
         this.reason = 'dropped the payload, search for more'
     }
@@ -109,7 +109,7 @@ class CollectorBot extends ActionBot {
                  && x <= e.x + BW
                  && e.team === team
         )
-        if (base) this.drop()
+        if (base) this.drop(true)
     }
 
     evoGoal(dt) {
@@ -131,6 +131,11 @@ class CollectorBot extends ActionBot {
     onScrapCapture() {
         this.action = 'ascend'
         this.expire = -1
+    }
+
+    onKill() {
+        log('handling kill')
+        this.drop(false)
     }
 
 }
